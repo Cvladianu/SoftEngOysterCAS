@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="878a7804-2058-4e46-9d60-429fb46a6cf7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/Oyster_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/Oyster_main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/Oyster_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/Oyster_test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEndTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEndTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEventTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEventTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyStartTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyStartTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -80,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JourneyEndTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JourneyEndTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEndTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="56" lean-forward="false" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+            <state relative-caret-position="204">
+              <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="21" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -112,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JourneyStartTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JourneyStartTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyStartTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="340">
+              <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -432,11 +426,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyStartTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tfl/billing/TravelTrackerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEventTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEndTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyStartTest.java" />
       </list>
     </option>
   </component>
@@ -614,7 +608,7 @@
       <recent name="D:\software engineering\Oyster\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JourneyEndTest">
+  <component name="RunManager" selected="JUnit.JourneyStartTest">
     <configuration default="false" name="JourneyEndTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -627,6 +621,32 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.tfl.billing" />
       <option name="MAIN_CLASS_NAME" value="com.tfl.billing.JourneyEndTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="JourneyStartTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.tfl.billing.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Oyster_test" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.tfl.billing" />
+      <option name="MAIN_CLASS_NAME" value="com.tfl.billing.JourneyStartTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -845,12 +865,14 @@
       <listeners />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="JUnit.JourneyEndTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.JourneyStartTest" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.JourneyEndTest" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.JourneyStartTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.JourneyEndTest" />
       </list>
     </recent_temporary>
   </component>
@@ -870,6 +892,9 @@
   <component name="TestHistory">
     <history-entry file="JourneyEndTest - 2017.11.20 at 22h 21m 18s.xml">
       <configuration name="JourneyEndTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JourneyStartTest - 2017.11.20 at 22h 26m 51s.xml">
+      <configuration name="JourneyStartTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -939,14 +964,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tfl/billing/JourneyStart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tfl/billing/Journey.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -973,16 +990,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyStartTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tfl/billing/JourneyEnd.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -999,10 +1006,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tfl/billing/JourneyStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyEndTest.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="21" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/tfl/billing/JourneyStartTest.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="56" lean-forward="false" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
