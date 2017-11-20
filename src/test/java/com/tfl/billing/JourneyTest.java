@@ -7,4 +7,5 @@ import org.junit.Test;
  * Created by cosmi_owugxv5 on 11/20/2017.
  */
 public class JourneyTest {
+
 }
