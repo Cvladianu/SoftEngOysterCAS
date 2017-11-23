@@ -5,3 +5,10 @@ This is to keep track of updates.
 2. created lib dependencies; added JourneyEnd creation testing;
 
 3. added JourneyStart creation testing;
+
+4. readded library, as it was buggy( did not show the code in the library)-fixed
+
+5. added partially completed class diagram of existing code
+
+6. added fully completed diagram of existing code
+
