@@ -1,4 +1,6 @@
 package com.tfl.billing;
+
+import org.jmock.Mockery;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
@@ -24,6 +26,7 @@ public class JourneyTest {
     private JourneyStart start;
     private JourneyEnd end;
     private Journey journey;
+    private RandomVals randomVals= new RandomVals();
 
     @Before
     public void setUp()
@@ -57,5 +60,24 @@ public class JourneyTest {
         journey = new Journey(start,end);
 
         assertThat(journey.durationSeconds(), is(2));
+    }
+
+    @Test
+    public void TestDifRandom()
+    {
+        start=new JourneyStart(cardId, readerIdStart);
+        long randomMili=randomVals.getRandomMilis();
+        long d= randomMili+start.time();
+        long dSeconds=randomMili/1000;
+
+        clock=context.mock(ClockInterface.class);
+
+        context.checking(new Expectations(){{
+            oneOf(clock).currentTimeMillis(); will(returnValue(d));
+    }});
+        end=new JourneyEnd(cardId, readerIdEnd, clock);
+        journey= new Journey(start,end);
+
+        assertThat((long) journey.durationSeconds(), is(dSeconds));
     }
 }
