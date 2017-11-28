@@ -15,7 +15,7 @@ public class JourneyStartTest {
     JourneyStart journeyStart = new JourneyStart(cardId, readerId);
 
     @Test
-    public void createdJourneyEnd()
+    public void createdJourneyStart()
     {
         assertThat(journeyStart.cardId(), is(cardId));
         assertThat(journeyStart.readerId(), is(readerId));

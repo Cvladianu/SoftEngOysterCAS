@@ -42,8 +42,8 @@ public class Journey {
         return (int) ((end.time() - start.time()) / 1000);
     }
 
-    public String durationMinutes() {
-        return "" + durationSeconds() / 60 + ":" + durationSeconds() % 60;
+    public int durationMinutes() {
+        return durationSeconds() / 60 +  durationSeconds() % 60;
     }
 
     private String format(long time) {
