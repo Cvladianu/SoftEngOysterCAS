@@ -37,4 +37,5 @@ public class TravelTrackerTest {
             assertEquals(e.getMessage(), s);
         };
     }
+
 }

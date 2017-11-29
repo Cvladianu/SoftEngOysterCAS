@@ -23,5 +23,7 @@ assertThat( (long) journey.durationSeconds(), is(dSeconds));
 This was due to start.time() providing a long value, which could not be stored in an int.
 
 
-9. refactored JourneyEvent by Overloading its constructor with another parameter, a ClockInterface object. So, when the parameter is passed, instead of assigning System.currentTimeMillis() to time, clock.currentTimeMillis() will be assigned instead. ClockInterface is an interface, so we can mock it, and we created a SystemClock class with a currentTimeMillis(): long method which calls System.currentTimeMillis(). So the functionality of the code is not changed in any way;
+9. refactored JourneyEvent by Overloading its constructor with another parameter, a ClockInterface object. So, when the parameter is passed, instead of assigning System.currentTimeMillis() to time, clock.currentTimeMillis() will be assigned instead. ClockInterface is an interface, so we can mock it, and we created a SystemClock class with a currentTimeMillis(): long method which calls System.currentTimeMillis(). So the functionality of the code is not changed in any way.
+
+10. added two testing methods for the cardscanned method in TravelTracker, to check correct behaviour of the exception throw (exception type and message), by checking with an UUID which is not in the database.
 
