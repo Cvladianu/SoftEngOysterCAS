@@ -27,3 +27,4 @@ This was due to start.time() providing a long value, which could not be stored i
 
 10. added two testing methods for the cardscanned method in TravelTracker, to check correct behaviour of the exception throw (exception type and message), by checking with an UUID which is not in the database.
 
+11. added a normal constructor and a constructor which takes a list<journeyevent> and set<uuid> to initialise the traveltracker fields (dependency injection) to be able to test the cardScanned method; namely, in the test method we will create 2 such objects, which we will pass to the traveltracker constructor. If we modify the 2 objects inside traveltracker (using carscanned calls), the changes will reflect to the original objects, hence being able to test it.
