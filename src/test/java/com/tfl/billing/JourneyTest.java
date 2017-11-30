@@ -1,6 +1,5 @@
 package com.tfl.billing;
 
-import org.jmock.Mockery;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
@@ -22,7 +21,7 @@ public class JourneyTest {
     private UUID cardId;
     private UUID readerIdStart;
     private UUID readerIdEnd;
-    private ClockInterface clock;
+    private ClockI clock;
     private JourneyStart start;
     private JourneyEnd end;
     private Journey journey;
@@ -52,7 +51,7 @@ public class JourneyTest {
 
         start = new JourneyStart(cardId, readerIdStart);
         try {
-            Thread.sleep(2000);                 //1000 milliseconds is one second.
+            Thread.sleep(2000);                 //1000 milliseconds ClockI one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -70,7 +69,7 @@ public class JourneyTest {
         long d= randomMili+start.time();
         long dSeconds=randomMili/1000;
 
-        clock=context.mock(ClockInterface.class);
+        clock=context.mock(ClockI.class);
 
         context.checking(new Expectations(){{
             oneOf(clock).currentTimeMillis(); will(returnValue(d));

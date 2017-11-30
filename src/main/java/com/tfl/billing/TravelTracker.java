@@ -13,8 +13,21 @@ public class TravelTracker implements ScanListener {
     static final BigDecimal OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.40);
     static final BigDecimal PEAK_JOURNEY_PRICE = new BigDecimal(3.20);
 
-    private final List<JourneyEvent> eventLog = new ArrayList<JourneyEvent>();
-    private final Set<UUID> currentlyTravelling = new HashSet<UUID>();
+    private final List<JourneyEvent> eventLog;
+    private final Set<UUID> currentlyTravelling;
+
+
+    public TravelTracker()
+    {
+        this.eventLog=new ArrayList<>();
+        this.currentlyTravelling= new HashSet<>();
+    }
+    //Dependency injection
+    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling)
+    {
+        this.eventLog=eventlog;
+        this.currentlyTravelling=currentlyTravelling;
+    }
 
     public void chargeAccounts() {
         CustomerDatabase customerDatabase = CustomerDatabase.getInstance();
@@ -70,7 +83,7 @@ public class TravelTracker implements ScanListener {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        return (hour >= 6 && hour <= 9) || (hour >= 17 && hour <= 19);
+        return (hour >= 6 && hour <= 9) ||   (hour >= 17 && hour <= 19);
     }
 
     public void connect(OysterCardReader... cardReaders) {
