@@ -13,3 +13,5 @@ lib/
 *.bat
 
 gradlew
+
+*.iml
