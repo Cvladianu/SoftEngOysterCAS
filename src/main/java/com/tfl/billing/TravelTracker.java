@@ -32,6 +32,12 @@ public class TravelTracker implements ScanListener {
         this.adaptorDatabase=adaptorDatabase;
     }
 
+    public TravelTracker(List<JourneyEvent> eventLog, Set<UUID> currentlyTravelling) {
+        this.eventLog=eventLog;
+        this.currentlyTravelling=currentlyTravelling;
+        this.adaptorDatabase=AdaptorDatabase.getInstance();
+    }
+
     public void chargeAccounts() {
         CustomerDatabase customerDatabase = CustomerDatabase.getInstance();
 
