@@ -57,10 +57,10 @@ public class TravelTrackerTest {
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
 
-        travelTracker= new TravelTracker(eventLog, currentlyTravelling);
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md);
 
         context.checking(new Expectations() { {
-            oneOf(md).getInstance().isRegisteredId(cardId); will(returnValue(true));
+            oneOf(md).isRegisteredId(cardId); will(returnValue(true));
         }});
 
        travelTracker.cardScanned(cardId, readerId);

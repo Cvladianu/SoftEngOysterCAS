@@ -15,18 +15,21 @@ public class TravelTracker implements ScanListener {
 
     private final List<JourneyEvent> eventLog;
     private final Set<UUID> currentlyTravelling;
+    private final MockableDatabase adaptorDatabase;
 
 
     public TravelTracker()
     {
         this.eventLog=new ArrayList<>();
         this.currentlyTravelling= new HashSet<>();
+        this.adaptorDatabase=AdaptorDatabase.getInstance();
     }
     //Dependency injection
-    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling)
+    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, MockableDatabase adaptorDatabase)
     {
         this.eventLog=eventlog;
         this.currentlyTravelling=currentlyTravelling;
+        this.adaptorDatabase=adaptorDatabase;
     }
 
     public void chargeAccounts() {
@@ -98,7 +101,7 @@ public class TravelTracker implements ScanListener {
             eventLog.add(new JourneyEnd(cardId, readerId));
             currentlyTravelling.remove(cardId);
         } else {
-            if (CustomerDatabase.getInstance().isRegisteredId(cardId)) {
+            if (adaptorDatabase.isRegisteredId(cardId)) {
                 currentlyTravelling.add(cardId);
                 eventLog.add(new JourneyStart(cardId, readerId));
             } else {
