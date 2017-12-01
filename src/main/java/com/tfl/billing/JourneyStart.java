@@ -7,7 +7,7 @@ public class JourneyStart extends JourneyEvent {
         super(cardId, readerId);
     }
 
-    public JourneyStart(UUID cardId, UUID readerId, ClockI clock) {
+    public JourneyStart(UUID cardId, UUID readerId, Cloackable clock) {
         super(cardId, readerId, clock);
     }
 }

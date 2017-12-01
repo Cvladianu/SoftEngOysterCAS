@@ -21,7 +21,7 @@ public class JourneyTest {
     private UUID cardId;
     private UUID readerIdStart;
     private UUID readerIdEnd;
-    private ClockI clock;
+    private Cloackable clock;
     private JourneyStart start;
     private JourneyEnd end;
     private Journey journey;
@@ -37,7 +37,7 @@ public class JourneyTest {
     }
 
     @Test
-    public void TestDifZeroNoMock()
+    public void TestZeroSecondsJourney()
     {
         start = new JourneyStart(cardId, readerIdStart);
         end= new JourneyEnd(cardId, readerIdEnd);
@@ -46,12 +46,12 @@ public class JourneyTest {
     }
 
     @Test
-    public void TestDifTwoNoMock()
+    public void TestTwoSecondsJourney()
     {
 
         start = new JourneyStart(cardId, readerIdStart);
         try {
-            Thread.sleep(2000);                 //1000 milliseconds ClockI one second.
+            Thread.sleep(2000);                 //1000 milliseconds Cloackable one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -69,7 +69,7 @@ public class JourneyTest {
         long d= randomMili+start.time();
         long dSeconds=randomMili/1000;
 
-        clock=context.mock(ClockI.class);
+        clock=context.mock(Cloackable.class);
 
         context.checking(new Expectations(){{
             oneOf(clock).currentTimeMillis(); will(returnValue(d));

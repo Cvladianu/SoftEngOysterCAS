@@ -14,7 +14,7 @@ public abstract class JourneyEvent {
         this.time = System.currentTimeMillis();
     }
 
-    public JourneyEvent(UUID cardId, UUID readerId, ClockI clock) {
+    public JourneyEvent(UUID cardId, UUID readerId, Cloackable clock) {
         this.cardId = cardId;
         this.readerId = readerId;
         this.time = clock.currentTimeMillis();
