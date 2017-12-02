@@ -48,7 +48,7 @@ public class TravelTrackerTest {
     }
 
     @Test
-    public void keepsARecordOfTheTravellingCustomers()
+    public void TestAddTravellingCustomer()
     {
         MockableDatabase md = context.mock(MockableDatabase.class);
 
@@ -66,6 +66,8 @@ public class TravelTrackerTest {
 
        travelTracker.cardScanned(cardId, readerId);
        assertTrue(currentlyTravelling.contains(cardId)) ;
+        context.assertIsSatisfied();
+
     }
 
     @Test
