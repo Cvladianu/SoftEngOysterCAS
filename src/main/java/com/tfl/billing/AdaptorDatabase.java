@@ -10,7 +10,7 @@ public class AdaptorDatabase implements MockableDatabase {
 
     private static AdaptorDatabase instance = new AdaptorDatabase();
 
-    CustomerDatabase customerDatabase = CustomerDatabase.getInstance();
+    private CustomerDatabase customerDatabase = CustomerDatabase.getInstance();
 
     public static AdaptorDatabase getInstance() {
         return instance;

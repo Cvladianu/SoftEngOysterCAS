@@ -121,4 +121,10 @@ public class TravelTrackerTest {
         assertFalse(eventLog.isEmpty());
     }
 
+    @Test
+    public void TestJourneyCostPeak()
+    {
+
+    }
+
 }
