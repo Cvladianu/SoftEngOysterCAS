@@ -78,5 +78,6 @@ public class JourneyTest {
         journey= new Journey(start,end);
 
         assertThat((long) journey.durationSeconds(), is(dSeconds));
+        context.assertIsSatisfied();
     }
 }
