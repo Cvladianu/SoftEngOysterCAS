@@ -48,7 +48,7 @@ public class TravelTrackerTest {
     }
 
     @Test
-    public void TestAddTravellingCustomer()
+    public void keepsTrackOfTravellingCustomer()
     {
         MockableDatabase md = context.mock(MockableDatabase.class);
 
@@ -65,31 +65,60 @@ public class TravelTrackerTest {
         }});
 
        travelTracker.cardScanned(cardId, readerId);
-       assertTrue(currentlyTravelling.contains(cardId)) ;
-        context.assertIsSatisfied();
+       assertTrue(currentlyTravelling.contains(cardId));
+       assertFalse(eventLog.isEmpty());
 
+       context.assertIsSatisfied();
+    }
+
+    @Test
+    public void keepsTrackOfMoreTravellingCustomers()
+    {
+        MockableDatabase md = context.mock(MockableDatabase.class);
+
+        UUID cardId1=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
+        UUID cardId2=UUID.fromString("89adbd1c-4de6-40e5-98bc-b3315c6873f2");
+        readerId=UUID.randomUUID();
+
+        List<JourneyEvent> eventLog = new ArrayList<>();
+        Set<UUID> currentlyTravelling = new HashSet<>();
+
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md);
+
+        context.checking(new Expectations() { {
+            oneOf(md).isRegisteredId(cardId1); will(returnValue(true));
+            oneOf(md).isRegisteredId(cardId2); will(returnValue(true));
+        }});
+
+        travelTracker.cardScanned(cardId1, readerId);
+        readerId=UUID.randomUUID();
+        travelTracker.cardScanned(cardId2, readerId);
+        assertTrue(currentlyTravelling.contains(cardId2));
+
+        readerId=UUID.randomUUID();
+        travelTracker.cardScanned(cardId2, readerId);
+
+        assertTrue(eventLog.size() == 3);
+        assertTrue(currentlyTravelling.contains(cardId1));
+        assertFalse(currentlyTravelling.contains(cardId2));
+
+        context.assertIsSatisfied();
     }
 
     @Test
     public void discardsTravelingCustomerAfterSecondScan()
     {
-//        MockableDatabase md = context.mock(MockableDatabase.class);
-
         cardId=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
         readerId=UUID.randomUUID();
 
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
         currentlyTravelling.add(cardId);
-
         travelTracker= new TravelTracker(eventLog, currentlyTravelling);
-
-//        context.checking(new Expectations() { {
-//            oneOf(md).isRegisteredId(cardId); will(returnValue(true));
-//        }});
 
         travelTracker.cardScanned(cardId, readerId);
         assertFalse(currentlyTravelling.contains(cardId)) ;
+        assertFalse(eventLog.isEmpty());
     }
 
 }
