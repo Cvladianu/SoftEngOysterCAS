@@ -17,3 +17,5 @@ gradlew
 *.iml
 
 *.class
+
+.DS_Store
