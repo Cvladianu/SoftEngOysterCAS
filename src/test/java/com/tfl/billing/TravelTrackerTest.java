@@ -5,10 +5,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import com.oyster.OysterCard;
+import com.tfl.external.Customer;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -21,6 +24,7 @@ public class TravelTrackerTest {
     TravelTracker travelTracker;
     UUID cardId;
     UUID readerId;
+    List<Customer> customers = new ArrayList<Customer>();
 
     @Test (expected = UnknownOysterCardException.class)
     public void throwsExceptionIfUnknownCustomerTriesToScanCard()
@@ -124,7 +128,41 @@ public class TravelTrackerTest {
     @Test
     public void TestJourneyCostPeak()
     {
+        ControllableClock clock = new ControllableClock();
+        ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
+        MockableDatabase md = context.mock(MockableDatabase.class);
 
+        cardId=UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+        readerId=UUID.randomUUID();
+        JourneyStart start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
+        //initialise customerList
+
+        customers.add(new Customer("Fred Bloggs", new OysterCard("38400000-8cf0-11bd-b23e-10b96e4ef00d")));
+        //add events to eventlog
+        List<JourneyEvent> eventLog = new ArrayList<>();
+        Set<UUID> currentlyTravelling = new HashSet<>();
+        clock.setTime(6, 0, 0);
+        eventLog.add(start);
+        clock.setTime(6,11,32);
+        eventLog.add(end);
+
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, paymentSystem);
+
+        context.checking(new Expectations() { {
+            oneOf(md).getCustomers(); will(returnValue(customers));
+            //allowing(md).getCustomers();
+        }});
+        //assertThat(md.getCustomers().size(), is(1));
+        travelTracker.chargeAccounts();
+
+        assertEquals( roundToNearestPenny(new BigDecimal(3.20)), paymentSystem.getTotal());
+        context.assertIsSatisfied();
     }
 
+
+    private BigDecimal roundToNearestPenny(BigDecimal poundsAndPence) {
+        return poundsAndPence.setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
 }

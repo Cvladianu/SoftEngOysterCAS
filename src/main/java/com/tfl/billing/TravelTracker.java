@@ -16,6 +16,7 @@ public class TravelTracker implements ScanListener {
     private final List<JourneyEvent> eventLog;
     private final Set<UUID> currentlyTravelling;
     private final MockableDatabase adaptorDatabase;
+    private final PaymentSystem paymentSystem;
 
 
     public TravelTracker()
@@ -23,6 +24,7 @@ public class TravelTracker implements ScanListener {
         this.eventLog=new ArrayList<>();
         this.currentlyTravelling= new HashSet<>();
         this.adaptorDatabase=AdaptorDatabase.getInstance();
+        this.paymentSystem=AdaptorPaymentSystem.getInstance();
     }
     //Dependency injection
     public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, MockableDatabase adaptorDatabase)
@@ -30,16 +32,26 @@ public class TravelTracker implements ScanListener {
         this.eventLog=eventlog;
         this.currentlyTravelling=currentlyTravelling;
         this.adaptorDatabase=adaptorDatabase;
+        this.paymentSystem=AdaptorPaymentSystem.getInstance();
+    }
+
+    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, MockableDatabase adaptorDatabase, PaymentSystem adaptorPaymentSystem)
+    {
+        this.eventLog=eventlog;
+        this.currentlyTravelling=currentlyTravelling;
+        this.adaptorDatabase=adaptorDatabase;
+        this.paymentSystem=adaptorPaymentSystem;
     }
 
     public TravelTracker(List<JourneyEvent> eventLog, Set<UUID> currentlyTravelling) {
         this.eventLog=eventLog;
         this.currentlyTravelling=currentlyTravelling;
         this.adaptorDatabase=AdaptorDatabase.getInstance();
+        this.paymentSystem=AdaptorPaymentSystem.getInstance();
     }
 
     public void chargeAccounts() {
-        CustomerDatabase customerDatabase = CustomerDatabase.getInstance();
+        MockableDatabase customerDatabase = adaptorDatabase;
 
         List<Customer> customers = customerDatabase.getCustomers();
         for (Customer customer : customers) {
@@ -48,10 +60,12 @@ public class TravelTracker implements ScanListener {
     }
 
     private void totalJourneysFor(Customer customer) {
+
         List<JourneyEvent> customerJourneyEvents = new ArrayList<JourneyEvent>();
         for (JourneyEvent journeyEvent : eventLog) {
             if (journeyEvent.cardId().equals(customer.cardId())) {
                 customerJourneyEvents.add(journeyEvent);
+
             }
         }
 
@@ -77,7 +91,7 @@ public class TravelTracker implements ScanListener {
             customerTotal = customerTotal.add(journeyPrice);
         }
 
-        PaymentsSystem.getInstance().charge(customer, journeys, roundToNearestPenny(customerTotal));
+        paymentSystem.charge(customer, journeys, roundToNearestPenny(customerTotal));
     }
 
     private BigDecimal roundToNearestPenny(BigDecimal poundsAndPence) {
@@ -115,5 +129,4 @@ public class TravelTracker implements ScanListener {
             }
         }
     }
-
 }
