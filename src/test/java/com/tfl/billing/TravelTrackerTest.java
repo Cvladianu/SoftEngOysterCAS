@@ -127,7 +127,7 @@ public class TravelTrackerTest {
         assertFalse(currentlyTravelling.contains(cardId)) ;
         assertFalse(eventLog.isEmpty());
     }
-
+    //to delete the crap below
     @Test
     public void TestJourneyCostPeak()
     {

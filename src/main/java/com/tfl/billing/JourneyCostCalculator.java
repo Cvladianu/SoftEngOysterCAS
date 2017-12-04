@@ -18,6 +18,16 @@ public class JourneyCostCalculator {
     public JourneyCostCalculator() {
     }
 
+    public BigDecimal getRoundedOffPeak()
+    {
+        return roundToNearestPenny(OFF_PEAK_JOURNEY_PRICE);
+    }
+
+    public BigDecimal getRoundedPeak()
+    {
+        return roundToNearestPenny(PEAK_JOURNEY_PRICE);
+    }
+
     public BigDecimal customerTotalFor(List<Journey> journeys)
     {
         BigDecimal customerTotal = new BigDecimal(0);
@@ -32,7 +42,7 @@ public class JourneyCostCalculator {
         return roundToNearestPenny(customerTotal);
     }
 
-    private BigDecimal roundToNearestPenny(BigDecimal poundsAndPence) {
+    public BigDecimal roundToNearestPenny(BigDecimal poundsAndPence) {
         return poundsAndPence.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
