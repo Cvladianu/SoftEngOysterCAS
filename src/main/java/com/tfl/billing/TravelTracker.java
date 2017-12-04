@@ -63,11 +63,12 @@ public class TravelTracker implements ScanListener {
 
     private void totalJourneysFor(Customer customer) {
 
+        JourneyCostCalculator journeyCostCalculator= new JourneyCostCalculator();
+
         List<JourneyEvent> customerJourneyEvents = new ArrayList<JourneyEvent>();
         for (JourneyEvent journeyEvent : eventLog) {
             if (journeyEvent.cardId().equals(customer.cardId())) {
                 customerJourneyEvents.add(journeyEvent);
-
             }
         }
 
@@ -84,15 +85,7 @@ public class TravelTracker implements ScanListener {
             }
         }
 
-        BigDecimal customerTotal = new BigDecimal(0);
-        for (Journey journey : journeys) {
-            BigDecimal journeyPrice = OFF_PEAK_JOURNEY_PRICE;
-            if (peak(journey)) {
-                journeyPrice = PEAK_JOURNEY_PRICE;
-            }
-            customerTotal = customerTotal.add(journeyPrice);
-        }
-
+        BigDecimal customerTotal =journeyCostCalculator.customerTotalFor(journeys);
         paymentSystem.charge(customer, journeys, roundToNearestPenny(customerTotal));
     }
 
@@ -108,10 +101,6 @@ public class TravelTracker implements ScanListener {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        /*System.out.println(time);
-        System.out.println(hour);
-        System.out.println(calendar.get(Calendar.MINUTE));
-        System.out.println(calendar.get(Calendar.SECOND));*/
         return (hour >= 6 && hour <= 9) ||   (hour >= 17 && hour <= 19);
     }
 

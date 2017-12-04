@@ -35,4 +35,6 @@ This was due to start.time() providing a long value, which could not be stored i
 
 14. Solved the controllableClock issue, now gets time accurately and properly, using LocalDateTime.atZone().toInstant().toEpochMili();
 
-15. Renamed Adaptor interfaces with better names; Moved adaptors and their interfaces to a separate folder(Adaptors) for better code structure; clock controller into Utils
+15. Renamed Adaptor interfaces with better names; Moved adaptors and their interfaces to a separate folder(Adaptors) for better code structure; clock controller into Utils.
+
+16. Created JourneyCostCalcultor class and moved rounding and peak checking together with the part of code that calculates the total sum for the journey a customer has completed.
