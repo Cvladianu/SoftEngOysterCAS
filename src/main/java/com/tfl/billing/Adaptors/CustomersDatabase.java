@@ -1,4 +1,4 @@
-package com.tfl.billing;
+package com.tfl.billing.Adaptors;
 
 import com.tfl.external.Customer;
 import com.tfl.external.CustomerDatabase;
@@ -6,7 +6,7 @@ import com.tfl.external.CustomerDatabase;
 import java.util.List;
 import java.util.UUID;
 
-public interface MockableDatabase {
+public interface CustomersDatabase {
 
     List<Customer> getCustomers();
 

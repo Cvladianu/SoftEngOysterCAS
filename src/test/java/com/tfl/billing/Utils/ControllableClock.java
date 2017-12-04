@@ -1,10 +1,11 @@
-package com.tfl.billing;
+package com.tfl.billing.Utils;
+
+import com.tfl.billing.Clock;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 
-public class ControllableClock implements Cloackable {
+public class ControllableClock implements Clock {
     private LocalDateTime time;
     private LocalDateTime now;
     private long epoch = System.currentTimeMillis();

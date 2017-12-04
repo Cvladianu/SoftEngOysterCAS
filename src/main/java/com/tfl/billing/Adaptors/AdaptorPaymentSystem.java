@@ -1,11 +1,11 @@
-package com.tfl.billing;
+package com.tfl.billing.Adaptors;
 
+import com.tfl.billing.Journey;
 import com.tfl.external.Customer;
 import com.tfl.external.PaymentsSystem;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 public class AdaptorPaymentSystem implements PaymentSystem {
     private static AdaptorPaymentSystem instance= new AdaptorPaymentSystem();

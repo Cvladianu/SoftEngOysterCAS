@@ -1,9 +1,11 @@
-package com.tfl.billing;
+package com.tfl.billing.Adaptors;
+
+import com.tfl.billing.Clock;
 
 /**
  * Created by cosmi_owugxv5 on 11/28/2017.
  */
-public class SystemClock implements Cloackable {
+public class SystemClock implements Clock {
     @Override
     public long currentTimeMillis() {
         return System.currentTimeMillis();

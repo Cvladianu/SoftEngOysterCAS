@@ -34,3 +34,5 @@ This was due to start.time() providing a long value, which could not be stored i
 13. Did the same for the PaymentsSystem, created test that assesses peak and off peak charges are accurate, so we can ensure the code keeps its functionality when we refactor it. Custom clock returns "hardcoded" miliseconds, needs refactoring.
 
 14. Solved the controllableClock issue, now gets time accurately and properly, using LocalDateTime.atZone().toInstant().toEpochMili();
+
+15. Renamed Adaptor interfaces with better names; Moved adaptors and their interfaces to a separate folder(Adaptors) for better code structure; clock controller into Utils

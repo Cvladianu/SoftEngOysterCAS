@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.oyster.OysterCard;
+import com.tfl.billing.Adaptors.CustomersDatabase;
+import com.tfl.billing.Utils.ControllableClock;
 import com.tfl.external.Customer;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -54,7 +56,7 @@ public class TravelTrackerTest {
     @Test
     public void keepsTrackOfTravellingCustomer()
     {
-        MockableDatabase md = context.mock(MockableDatabase.class);
+        CustomersDatabase md = context.mock(CustomersDatabase.class);
 
         cardId=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
         readerId=UUID.randomUUID();
@@ -78,7 +80,7 @@ public class TravelTrackerTest {
     @Test
     public void keepsTrackOfMoreTravellingCustomers()
     {
-        MockableDatabase md = context.mock(MockableDatabase.class);
+        CustomersDatabase md = context.mock(CustomersDatabase.class);
 
         UUID cardId1=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
         UUID cardId2=UUID.fromString("89adbd1c-4de6-40e5-98bc-b3315c6873f2");
@@ -130,7 +132,7 @@ public class TravelTrackerTest {
     {
         ControllableClock clock = new ControllableClock();
         ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
-        MockableDatabase md = context.mock(MockableDatabase.class);
+        CustomersDatabase md = context.mock(CustomersDatabase.class);
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
 
@@ -166,7 +168,7 @@ public class TravelTrackerTest {
     {
         ControllableClock clock = new ControllableClock();
         ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
-        MockableDatabase md = context.mock(MockableDatabase.class);
+        CustomersDatabase md = context.mock(CustomersDatabase.class);
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
 
@@ -204,7 +206,7 @@ public class TravelTrackerTest {
     {
         ControllableClock clock = new ControllableClock();
         ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
-        MockableDatabase md = context.mock(MockableDatabase.class);
+        CustomersDatabase md = context.mock(CustomersDatabase.class);
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
 

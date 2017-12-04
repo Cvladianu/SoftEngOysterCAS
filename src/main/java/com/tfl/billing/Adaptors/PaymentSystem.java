@@ -1,5 +1,6 @@
-package com.tfl.billing;
+package com.tfl.billing.Adaptors;
 
+import com.tfl.billing.Journey;
 import com.tfl.external.Customer;
 
 import java.math.BigDecimal;

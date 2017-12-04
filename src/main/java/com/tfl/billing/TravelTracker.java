@@ -1,9 +1,11 @@
 package com.tfl.billing;
 
 import com.oyster.*;
+import com.tfl.billing.Adaptors.AdaptorDatabase;
+import com.tfl.billing.Adaptors.AdaptorPaymentSystem;
+import com.tfl.billing.Adaptors.CustomersDatabase;
+import com.tfl.billing.Adaptors.PaymentSystem;
 import com.tfl.external.Customer;
-import com.tfl.external.CustomerDatabase;
-import com.tfl.external.PaymentsSystem;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -15,7 +17,7 @@ public class TravelTracker implements ScanListener {
 
     private final List<JourneyEvent> eventLog;
     private final Set<UUID> currentlyTravelling;
-    private final MockableDatabase adaptorDatabase;
+    private final CustomersDatabase adaptorDatabase;
     private final PaymentSystem paymentSystem;
 
 
@@ -23,11 +25,11 @@ public class TravelTracker implements ScanListener {
     {
         this.eventLog=new ArrayList<>();
         this.currentlyTravelling= new HashSet<>();
-        this.adaptorDatabase=AdaptorDatabase.getInstance();
-        this.paymentSystem=AdaptorPaymentSystem.getInstance();
+        this.adaptorDatabase= AdaptorDatabase.getInstance();
+        this.paymentSystem= AdaptorPaymentSystem.getInstance();
     }
     //Dependency injection
-    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, MockableDatabase adaptorDatabase)
+    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase adaptorDatabase)
     {
         this.eventLog=eventlog;
         this.currentlyTravelling=currentlyTravelling;
@@ -35,7 +37,7 @@ public class TravelTracker implements ScanListener {
         this.paymentSystem=AdaptorPaymentSystem.getInstance();
     }
 
-    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, MockableDatabase adaptorDatabase, PaymentSystem adaptorPaymentSystem)
+    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase adaptorDatabase, PaymentSystem adaptorPaymentSystem)
     {
         this.eventLog=eventlog;
         this.currentlyTravelling=currentlyTravelling;
@@ -51,7 +53,7 @@ public class TravelTracker implements ScanListener {
     }
 
     public void chargeAccounts() {
-        MockableDatabase customerDatabase = adaptorDatabase;
+        CustomersDatabase customerDatabase = adaptorDatabase;
 
         List<Customer> customers = customerDatabase.getCustomers();
         for (Customer customer : customers) {
