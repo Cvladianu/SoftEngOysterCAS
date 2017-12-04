@@ -31,4 +31,4 @@ This was due to start.time() providing a long value, which could not be stored i
 
 12. Added another constructor to traveltracker, which takes a CustomerDatabase interface object; used adaptor pattern to be able to simulate behaviour. We created an adaptor class implementing the interface, which is a singleton just as CustomerDatabase, and added it to instance variables (dependency injection). Refactored cardscanned with the adaptor and created test for all behaviours (empty list of travellers, travellers already there when one card is scanned and results in one of their removals).
 
-13. Did the same for the PaymentsSystem, created test that assesses peak and off peak charges are accurate, so we can ensure the code keeps its functionality when we refactor it.
+13. Did the same for the PaymentsSystem, created test that assesses peak and off peak charges are accurate, so we can ensure the code keeps its functionality when we refactor it. Custom clock returns "hardcoded" miliseconds, needs refactoring.
