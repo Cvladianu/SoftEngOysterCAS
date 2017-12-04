@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import com.oyster.OysterCard;
 import com.tfl.billing.Adaptors.CustomersDatabase;
 import com.tfl.billing.Utils.ControllableClock;
+import com.tfl.billing.Utils.ControllablePaymentSystem;
 import com.tfl.external.Customer;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;

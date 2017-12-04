@@ -14,7 +14,7 @@ public class ControllableClock implements Clock {
     private int month;
     private int year;
 
-    ControllableClock()
+    public ControllableClock()
     {
         now = LocalDateTime.now();
         month = now.getMonthValue();
