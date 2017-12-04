@@ -28,3 +28,7 @@ This was due to start.time() providing a long value, which could not be stored i
 10. added two testing methods for the cardscanned method in TravelTracker, to check correct behaviour of the exception throw (exception type and message), by checking with an UUID which is not in the database.
 
 11. added a normal constructor and a constructor which takes a list<journeyevent> and set<uuid> to initialise the traveltracker fields (dependency injection) to be able to test the cardScanned method; namely, in the test method we will create 2 such objects, which we will pass to the traveltracker constructor. If we modify the 2 objects inside traveltracker (using carscanned calls), the changes will reflect to the original objects, hence being able to test it.
+
+12. Added another constructor to traveltracker, which takes a CustomerDatabase interface object; used adaptor pattern to be able to simulate behaviour. We created an adaptor class implementing the interface, which is a singleton just as CustomerDatabase, and added it to instance variables (dependency injection). Refactored cardscanned with the adaptor and created test for all behaviours (empty list of travellers, travellers already there when one card is scanned and results in one of their removals).
+
+13. Did the same for the PaymentsSystem, created test that assesses peak and off peak charges are accurate, so we can ensure the code keeps its functionality when we refactor it.
