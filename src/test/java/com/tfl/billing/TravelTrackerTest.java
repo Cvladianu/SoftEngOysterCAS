@@ -131,21 +131,21 @@ public class TravelTrackerTest {
         ControllableClock clock = new ControllableClock();
         ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
         MockableDatabase md = context.mock(MockableDatabase.class);
+        List<JourneyEvent> eventLog = new ArrayList<>();
+        Set<UUID> currentlyTravelling = new HashSet<>();
 
         cardId=UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
         readerId=UUID.randomUUID();
+        clock.setTime(4, 0, 0);
         JourneyStart start = new JourneyStart(cardId, readerId, clock);
         readerId=UUID.randomUUID();
+        clock.setTime(6,11,32);
         JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
         //initialise customerList
 
         customers.add(new Customer("Fred Bloggs", new OysterCard("38400000-8cf0-11bd-b23e-10b96e4ef00d")));
         //add events to eventlog
-        List<JourneyEvent> eventLog = new ArrayList<>();
-        Set<UUID> currentlyTravelling = new HashSet<>();
-        clock.setTime(6, 0, 0);
         eventLog.add(start);
-        clock.setTime(6,11,32);
         eventLog.add(end);
 
         travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, paymentSystem);
@@ -158,6 +158,90 @@ public class TravelTrackerTest {
         travelTracker.chargeAccounts();
 
         assertEquals( roundToNearestPenny(new BigDecimal(3.20)), paymentSystem.getTotal());
+        context.assertIsSatisfied();
+    }
+
+    @Test
+    public void TestJourneyCostOffPeak()
+    {
+        ControllableClock clock = new ControllableClock();
+        ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
+        MockableDatabase md = context.mock(MockableDatabase.class);
+        List<JourneyEvent> eventLog = new ArrayList<>();
+        Set<UUID> currentlyTravelling = new HashSet<>();
+
+        cardId=UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+        readerId=UUID.randomUUID();
+        clock.setTime(0, 0, 0);
+        JourneyStart start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(1,0,0);
+        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
+        //initialise customerList
+
+        customers.add(new Customer("Fred Bloggs", new OysterCard("38400000-8cf0-11bd-b23e-10b96e4ef00d")));
+        //add events to eventlog
+        eventLog.add(start);
+        eventLog.add(end);
+
+        //System.out.println(start.time());
+        //System.out.println(end.time());
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, paymentSystem);
+
+        context.checking(new Expectations() { {
+            oneOf(md).getCustomers(); will(returnValue(customers));
+            //allowing(md).getCustomers();
+        }});
+        //assertThat(md.getCustomers().size(), is(1));
+        travelTracker.chargeAccounts();
+
+        assertEquals( roundToNearestPenny(new BigDecimal(2.40)), paymentSystem.getTotal());
+        context.assertIsSatisfied();
+    }
+
+    @Test
+    public void TestTwoJourneyBothCosts()
+    {
+        ControllableClock clock = new ControllableClock();
+        ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
+        MockableDatabase md = context.mock(MockableDatabase.class);
+        List<JourneyEvent> eventLog = new ArrayList<>();
+        Set<UUID> currentlyTravelling = new HashSet<>();
+
+        cardId=UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+        readerId=UUID.randomUUID();
+        clock.setTime(1, 0, 0);
+        JourneyStart start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(3,11,32);
+        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
+        eventLog.add(start);
+        eventLog.add(end);
+        //second journey
+
+        readerId=UUID.randomUUID();
+        clock.setTime(4, 0, 0);
+        start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(6,11,32);
+        end = new JourneyEnd(cardId, readerId, clock);
+        eventLog.add(start);
+        eventLog.add(end);
+        //initialise customerList
+
+        customers.add(new Customer("Fred Bloggs", new OysterCard("38400000-8cf0-11bd-b23e-10b96e4ef00d")));
+
+
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, paymentSystem);
+
+        context.checking(new Expectations() { {
+            oneOf(md).getCustomers(); will(returnValue(customers));
+            //allowing(md).getCustomers();
+        }});
+        //assertThat(md.getCustomers().size(), is(1));
+        travelTracker.chargeAccounts();
+
+        assertEquals( roundToNearestPenny(new BigDecimal(5.60)), paymentSystem.getTotal());
         context.assertIsSatisfied();
     }
 

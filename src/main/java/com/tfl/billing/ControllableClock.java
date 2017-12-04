@@ -10,6 +10,6 @@ public class ControllableClock implements Cloackable {
     }
 
     public void setTime(int hour, int minute, int second) {
-        currentTime=1000*(3600*hour+60*minute+second);
+        currentTime=1000*(3600*(hour-1)+60*minute+second);
     }
 }
