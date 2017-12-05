@@ -120,6 +120,7 @@ public class JourneyCostCalculatorTest {
         assertThat(journeys.size(), is(4));
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedPeakLimit);
     }
+
     private void setUpLongPeak()
     {
         readerId=UUID.randomUUID();

@@ -18,6 +18,7 @@ public class JourneyCostCalculator {
     static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
     static final BigDecimal SHORT_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(1.60);
     static final String longJourneyDelimitator="25:00";
+    private boolean isPeak;
 
     public JourneyCostCalculator() {
     }
@@ -25,18 +26,21 @@ public class JourneyCostCalculator {
     public BigDecimal customerTotalFor(List<Journey> journeys)
     {
         BigDecimal customerTotal = new BigDecimal(0);
-
+        this.isPeak=false;
         for (Journey journey : journeys) {
 
             customerTotal = customerTotal.add(getJourneyPrice(journey));
         }
+        customerTotal=withLimits(customerTotal);
         return roundToNearestPenny(customerTotal);
     }
 
     public BigDecimal getJourneyPrice(Journey journey)
     {
+
         BigDecimal journeyPrice;
         if (peak(journey)) {
+            this.isPeak=true;
             journeyPrice=SHORT_PEAK_JOURNEY_PRICE;
             if(longJourney(journey))
             {
@@ -50,6 +54,21 @@ public class JourneyCostCalculator {
             {
                 journeyPrice=LONG_OFF_PEAK_JOURNEY_PRICE;
             }
+        }
+        return journeyPrice;
+    }
+
+    private BigDecimal withLimits(BigDecimal journeyPrice)
+    {
+        if(isPeak)
+        {
+            if(journeyPrice.compareTo(PEAK_LIMIT)>0)
+                journeyPrice=PEAK_LIMIT;
+        }
+        else
+        {
+            if(journeyPrice.compareTo(OFF_PEAK_LIMIT)>0)
+                journeyPrice=OFF_PEAK_LIMIT;
         }
         return journeyPrice;
     }
