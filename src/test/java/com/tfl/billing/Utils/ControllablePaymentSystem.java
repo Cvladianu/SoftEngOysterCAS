@@ -21,4 +21,16 @@ public class ControllablePaymentSystem implements PaymentSystem {
     public BigDecimal getTotal() {
         return totalBill;
     }
+
+    public BigDecimal getTotalBill() {
+        return totalBill;
+    }
+
+    public List<Journey> getJourneys() {
+        return journeys;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
 }
