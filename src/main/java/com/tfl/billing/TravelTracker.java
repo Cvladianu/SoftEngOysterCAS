@@ -17,7 +17,7 @@ public class TravelTracker implements ScanListener {
 
     private final List<JourneyEvent> eventLog;
     private final Set<UUID> currentlyTravelling;
-    private final CustomersDatabase adaptorDatabase;
+    private final CustomersDatabase customersDatabase;
     private final PaymentSystem paymentSystem;
     private final Charger charger;
 
@@ -26,25 +26,25 @@ public class TravelTracker implements ScanListener {
     {
         this.eventLog=new ArrayList<>();
         this.currentlyTravelling= new HashSet<>();
-        this.adaptorDatabase= AdaptorDatabase.getInstance();
+        this.customersDatabase = AdaptorDatabase.getInstance();
         this.paymentSystem= AdaptorPaymentSystem.getInstance();
         this.charger= new Charger();
     }
     //Dependency injection
-    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase adaptorDatabase)
+    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase)
     {
         this.eventLog=eventlog;
         this.currentlyTravelling=currentlyTravelling;
-        this.adaptorDatabase=adaptorDatabase;
+        this.customersDatabase = customersDatabase;
         this.paymentSystem=AdaptorPaymentSystem.getInstance();
         this.charger= new Charger();
     }
 
-    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase adaptorDatabase, PaymentSystem adaptorPaymentSystem)
+    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase, PaymentSystem adaptorPaymentSystem)
     {
         this.eventLog=eventlog;
         this.currentlyTravelling=currentlyTravelling;
-        this.adaptorDatabase=adaptorDatabase;
+        this.customersDatabase = customersDatabase;
         this.paymentSystem=adaptorPaymentSystem;
         this.charger= new Charger();
     }
@@ -52,13 +52,13 @@ public class TravelTracker implements ScanListener {
     public TravelTracker(List<JourneyEvent> eventLog, Set<UUID> currentlyTravelling) {
         this.eventLog=eventLog;
         this.currentlyTravelling=currentlyTravelling;
-        this.adaptorDatabase=AdaptorDatabase.getInstance();
+        this.customersDatabase =AdaptorDatabase.getInstance();
         this.paymentSystem=AdaptorPaymentSystem.getInstance();
         this.charger= new Charger();
     }
 
     public void chargeAccounts() {
-        CustomersDatabase customerDatabase = adaptorDatabase;
+        CustomersDatabase customerDatabase = customersDatabase;
 
         List<Customer> customers = customerDatabase.getCustomers();
         for (Customer customer : customers) {
@@ -109,7 +109,7 @@ public class TravelTracker implements ScanListener {
             eventLog.add(new JourneyEnd(cardId, readerId));
             currentlyTravelling.remove(cardId);
         } else {
-            if (adaptorDatabase.isRegisteredId(cardId)) {
+            if (customersDatabase.isRegisteredId(cardId)) {
                 currentlyTravelling.add(cardId);
                 eventLog.add(new JourneyStart(cardId, readerId));
             } else {
