@@ -25,6 +25,8 @@ public class JourneyCostCalculatorTest {
     private BigDecimal roundedShortPeak;
     private BigDecimal roundedLongOffPeak;
     private BigDecimal roundedShortOffPeak;
+    private BigDecimal roundedPeakLimit;
+    private BigDecimal roundedOffPeakLimit;
 
     @Before
     public void setUp()
@@ -37,6 +39,8 @@ public class JourneyCostCalculatorTest {
         roundedShortPeak=journeyCostCalculator.getRoundedShortPeak();
         roundedLongOffPeak=journeyCostCalculator.getRoundedLongOffPeak();
         roundedShortOffPeak=journeyCostCalculator.getRoundedShortOffPeak();
+        roundedPeakLimit=journeyCostCalculator.getPeakLimit();
+        roundedOffPeakLimit=journeyCostCalculator.getOffPeakLimit();
     }
 
     @Test
@@ -106,7 +110,16 @@ public class JourneyCostCalculatorTest {
         assertThat(journeys.size(), is(2));
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortOffPeak.add(roundedLongPeak));
     }
-
+    @Test
+    public void TestPeakLimitCap()
+    {
+        setUpLongPeak();
+        setUpLongPeak();
+        setUpLongOffPeak();
+        setUpLongPeak();
+        assertThat(journeys.size(), is(4));
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedPeakLimit);
+    }
     private void setUpLongPeak()
     {
         readerId=UUID.randomUUID();

@@ -11,6 +11,8 @@ import java.util.List;
  * Created by cosmi_owugxv5 on 12/4/2017.
  */
 public class JourneyCostCalculator {
+    static final BigDecimal OFF_PEAK_LIMIT = new BigDecimal(7);
+    static final BigDecimal PEAK_LIMIT = new BigDecimal(9);
     static final BigDecimal LONG_PEAK_JOURNEY_PRICE = new BigDecimal(3.80);
     static final BigDecimal SHORT_PEAK_JOURNEY_PRICE = new BigDecimal(2.90);
     static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
@@ -82,6 +84,10 @@ public class JourneyCostCalculator {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         return (hour >= 6 && hour <= 9) ||   (hour >= 17 && hour <= 19);
     }
+
+    public BigDecimal getPeakLimit(){ return roundToNearestPenny(PEAK_LIMIT); }
+
+    public BigDecimal getOffPeakLimit(){ return roundToNearestPenny(OFF_PEAK_LIMIT); }
 
     public BigDecimal getRoundedLongPeak() {
         return roundToNearestPenny(LONG_PEAK_JOURNEY_PRICE);
