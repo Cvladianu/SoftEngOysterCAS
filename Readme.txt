@@ -40,3 +40,7 @@ This was due to start.time() providing a long value, which could not be stored i
 16. Created JourneyCostCalcultor class and moved rounding and peak checking together with the part of code that calculates the total sum for the journey a customer has completed.
 
 17. Created unit tests for aforementioned class. Used set up methods for peak and off peak situations for reuse and maintainability of tests. Created 2 mathods in JourneyCostCalculator to provide the rounded peak and offpeak values. Need to refactor the tests from traveltracker, but will keep them around now to make sure we don't break anything.
+
+18. added customer and journeys fields to controllable payment systems to be able to test the charge method works properly;
+
+19. For consitency, each class should only do 1 thing, so we created another class that handles the charging. This also enables us to allow future development of the class, as you might have different methods of charging, add more functionality such as login, etc. 
