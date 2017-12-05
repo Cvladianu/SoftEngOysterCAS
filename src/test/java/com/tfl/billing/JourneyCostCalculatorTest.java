@@ -132,10 +132,10 @@ public class JourneyCostCalculatorTest {
     private void setUpLongOffPeak()
     {
         readerId=UUID.randomUUID();
-        clock.setTime(2, 12, 0);
+        clock.setTime(2, 12, 5);
         JourneyStart start = new JourneyStart(cardId, readerId, clock);
         readerId=UUID.randomUUID();
-        clock.setTime(3,11,32);
+        clock.setTime(2,37,5);
         JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
         journeys.add(new Journey(start,end));
     }
@@ -146,7 +146,7 @@ public class JourneyCostCalculatorTest {
         clock.setTime(2, 12, 0);
         JourneyStart start = new JourneyStart(cardId, readerId, clock);
         readerId=UUID.randomUUID();
-        clock.setTime(2,26,32);
+        clock.setTime(2,27,38);
         JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
         journeys.add(new Journey(start,end));
     }
