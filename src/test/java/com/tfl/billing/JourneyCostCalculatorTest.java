@@ -61,7 +61,7 @@ public class JourneyCostCalculatorTest {
     @Test
     public void TestJourneyCostShortPeak()
     {
-        setUpLongPeak();
+        setUpShortPeak();
         assertThat(journeys.size(), is(1)) ;
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortPeak);
     }
@@ -77,7 +77,7 @@ public class JourneyCostCalculatorTest {
     @Test
     public void TestJourneyCostShortOffPeak()
     {
-        setUpLongOffPeak();
+        setUpShortOffPeak();
         assertThat(journeys.size(), is(1)) ;
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortOffPeak);
     }

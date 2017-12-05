@@ -18,7 +18,7 @@ public class JourneyCostCalculator {
     static final BigDecimal SHORT_PEAK_JOURNEY_PRICE = new BigDecimal(2.90);
     static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
     static final BigDecimal SHORT_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(1.60);
-
+    static final String longJourneyDelimitator="25:00";
 
     public JourneyCostCalculator() {
     }
@@ -48,8 +48,55 @@ public class JourneyCostCalculator {
         return roundToNearestPenny(customerTotal);
     }
 
+    /*public BigDecimal customerTotalFor(List<Journey> journeys)
+    {
+        BigDecimal customerTotal = new BigDecimal(0);
+
+        for (Journey journey : journeys) {
+
+            customerTotal = customerTotal.add(getJourneyPrice(journey));
+        }
+        return roundToNearestPenny(customerTotal);
+    }*/
+
+
+    public BigDecimal getJourneyPrice(Journey journey)
+    {
+        BigDecimal journeyPrice;
+        if (peak(journey)) {
+            journeyPrice=SHORT_PEAK_JOURNEY_PRICE;
+            if(longJourney(journey))
+            {
+                System.out.println("Short peak");
+                journeyPrice=LONG_PEAK_JOURNEY_PRICE;
+            }
+        }
+        else
+        {
+            journeyPrice=SHORT_OFF_PEAK_JOURNEY_PRICE;
+            if(longJourney(journey))
+            {
+                System.out.println("Short off peak");
+                journeyPrice=LONG_OFF_PEAK_JOURNEY_PRICE;
+            }
+        }
+        return journeyPrice;
+    }
+
     public BigDecimal roundToNearestPenny(BigDecimal poundsAndPence) {
         return poundsAndPence.setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    private boolean longJourney(Journey journey) {
+        String durationMinutes=journey.durationMinutes();
+        System.out.println(durationMinutes);
+
+        if(durationMinutes.length()==longJourneyDelimitator.length())
+        {
+            return durationMinutes.compareTo(longJourneyDelimitator)>=0;
+        }
+        return durationMinutes.length()>longJourneyDelimitator.length();
+
     }
 
     private boolean peak(Journey journey) {
