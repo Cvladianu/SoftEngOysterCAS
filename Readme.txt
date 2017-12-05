@@ -50,3 +50,5 @@ This was due to start.time() providing a long value, which could not be stored i
 21. refactored TravelTracker to use the new class instead, thus increasing consistency consistency
 
 22. Created failing test for journey cost calculator with short/long journeys
+
+23. Created more tests, created alternative method for calculating costs for a customer
