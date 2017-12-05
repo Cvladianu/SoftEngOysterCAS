@@ -62,7 +62,7 @@ public class JourneyCostCalculator {
         //nbSeconds%60 yields the accurate number of seconds
         if(journey.durationSeconds()%60==0)
             durationMinutes+="0";
-       System.out.println(durationMinutes);
+       //System.out.println(durationMinutes);
 
         if(durationMinutes.length()==longJourneyDelimitator.length())
         {

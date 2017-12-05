@@ -67,6 +67,13 @@ public class TravelTracker implements ScanListener {
     }
 
     private void totalJourneysFor(Customer customer) {
+        List<Journey> journeys = journeysFor(customer);
+
+        charger.charge(customer, journeys, paymentSystem);
+    }
+
+    private List<Journey> journeysFor(Customer customer)
+    {
         List<JourneyEvent> customerJourneyEvents = new ArrayList<JourneyEvent>();
         for (JourneyEvent journeyEvent : eventLog) {
             if (journeyEvent.cardId().equals(customer.cardId())) {
@@ -87,7 +94,7 @@ public class TravelTracker implements ScanListener {
             }
         }
 
-        charger.charge(customer, journeys, paymentSystem);
+        return journeys;
     }
 
     public void connect(OysterCardReader... cardReaders) {
