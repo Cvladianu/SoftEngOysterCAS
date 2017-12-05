@@ -58,7 +58,7 @@ public class ChargerTest {
         assertEquals(journeys, paymentSystem.getJourneys());
         assertEquals(journeyCostCalculator.getRoundedPeak(), paymentSystem.getTotalBill());
     }
-    
+
     @Test
     public void TestChargeAmountTwoJourneys()
     {

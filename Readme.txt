@@ -45,4 +45,6 @@ This was due to start.time() providing a long value, which could not be stored i
 
 19. For consitency, each class should only do 1 thing, so we created another class that handles the charging. This also enables us to allow future development of the class, as you might have different methods of charging, add more functionality such as login, etc. 
 
-20. Created charger class implementation and tests using TDD; 
+20. Created charger class implementation and tests using TDD; added one more test to the test class
+
+21. refactored TravelTracker to use the new class instead, thus increasing consistency consistency
