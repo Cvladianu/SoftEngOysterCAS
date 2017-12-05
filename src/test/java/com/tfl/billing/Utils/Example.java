@@ -1,10 +1,11 @@
-package com.tfl.billing;
+package com.tfl.billing.Utils;
 
 /**
  * Created by cosmi_owugxv5 on 12/2/2017.
  */
 import com.oyster.OysterCard;
 import com.oyster.OysterCardReader;
+import com.tfl.billing.TravelTracker;
 import com.tfl.underground.OysterReaderLocator;
 import com.tfl.underground.Station;
 public class Example {

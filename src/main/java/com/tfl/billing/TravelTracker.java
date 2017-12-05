@@ -19,6 +19,7 @@ public class TravelTracker implements ScanListener {
     private final Set<UUID> currentlyTravelling;
     private final CustomersDatabase adaptorDatabase;
     private final PaymentSystem paymentSystem;
+    private final Charger charger;
 
 
     public TravelTracker()
@@ -27,6 +28,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling= new HashSet<>();
         this.adaptorDatabase= AdaptorDatabase.getInstance();
         this.paymentSystem= AdaptorPaymentSystem.getInstance();
+        this.charger= new Charger();
     }
     //Dependency injection
     public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase adaptorDatabase)
@@ -35,6 +37,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling=currentlyTravelling;
         this.adaptorDatabase=adaptorDatabase;
         this.paymentSystem=AdaptorPaymentSystem.getInstance();
+        this.charger= new Charger();
     }
 
     public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase adaptorDatabase, PaymentSystem adaptorPaymentSystem)
@@ -43,6 +46,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling=currentlyTravelling;
         this.adaptorDatabase=adaptorDatabase;
         this.paymentSystem=adaptorPaymentSystem;
+        this.charger= new Charger();
     }
 
     public TravelTracker(List<JourneyEvent> eventLog, Set<UUID> currentlyTravelling) {
@@ -50,6 +54,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling=currentlyTravelling;
         this.adaptorDatabase=AdaptorDatabase.getInstance();
         this.paymentSystem=AdaptorPaymentSystem.getInstance();
+        this.charger= new Charger();
     }
 
     public void chargeAccounts() {

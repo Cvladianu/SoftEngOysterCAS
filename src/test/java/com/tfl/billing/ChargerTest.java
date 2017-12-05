@@ -58,4 +58,31 @@ public class ChargerTest {
         assertEquals(journeys, paymentSystem.getJourneys());
         assertEquals(journeyCostCalculator.getRoundedPeak(), paymentSystem.getTotalBill());
     }
+    
+    @Test
+    public void TestChargeAmountTwoJourneys()
+    {
+        customers.add(customer);
+        readerId= UUID.randomUUID();
+        clock.setTime(4, 0, 0);
+        JourneyStart start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(6,11,32);
+        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
+        journeys.add(new Journey(start,end));
+
+        readerId=UUID.randomUUID();
+        clock.setTime(2, 12, 0);
+        start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(3,11,32);
+        end = new JourneyEnd(cardId, readerId, clock);
+        journeys.add(new Journey(start,end));
+
+        charger.charge(customer, journeys, paymentSystem);
+
+        assertEquals(customer, paymentSystem.getCustomer());
+        assertEquals(journeys, paymentSystem.getJourneys());
+        assertEquals(journeyCostCalculator.getRoundedPeak().add(journeyCostCalculator.getRoundedOffPeak()), paymentSystem.getTotalBill());
+    }
 }
