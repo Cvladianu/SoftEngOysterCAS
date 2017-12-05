@@ -14,12 +14,18 @@ public class JourneyCostCalculator {
 
     static final BigDecimal OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.40);
     static final BigDecimal PEAK_JOURNEY_PRICE = new BigDecimal(3.20);
+    static final BigDecimal LONG_PEAK_JOURNEY_PRICE = new BigDecimal(3.80);
+    static final BigDecimal SHORT_PEAK_JOURNEY_PRICE = new BigDecimal(2.90);
+    static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
+    static final BigDecimal SHORT_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(1.60);
+
 
     public JourneyCostCalculator() {
     }
 
     public BigDecimal getRoundedOffPeak()
     {
+
         return roundToNearestPenny(OFF_PEAK_JOURNEY_PRICE);
     }
 
@@ -55,5 +61,21 @@ public class JourneyCostCalculator {
         calendar.setTime(time);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         return (hour >= 6 && hour <= 9) ||   (hour >= 17 && hour <= 19);
+    }
+
+    public BigDecimal getRoundedLongPeak() {
+        return roundToNearestPenny(LONG_PEAK_JOURNEY_PRICE);
+    }
+
+    public BigDecimal getRoundedShortPeak() {
+        return roundToNearestPenny(SHORT_PEAK_JOURNEY_PRICE);
+    }
+
+    public BigDecimal getRoundedLongOffPeak() {
+        return roundToNearestPenny(LONG_OFF_PEAK_JOURNEY_PRICE);
+    }
+
+    public BigDecimal getRoundedShortOffPeak() {
+        return roundToNearestPenny(SHORT_OFF_PEAK_JOURNEY_PRICE);
     }
 }

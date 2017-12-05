@@ -1,12 +1,6 @@
 package com.tfl.billing;
 
-import com.oyster.OysterCard;
-import com.tfl.billing.Adaptors.CustomersDatabase;
 import com.tfl.billing.Utils.ControllableClock;
-import com.tfl.billing.Utils.ControllablePaymentSystem;
-import com.tfl.external.Customer;
-import org.jmock.Expectations;
-import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,6 +23,10 @@ public class JourneyCostCalculatorTest {
     private List<Journey> journeys;
     private BigDecimal roundedOffPeak;
     private BigDecimal roundedPeak;
+    private BigDecimal roundedLongPeak;
+    private BigDecimal roundedShortPeak;
+    private BigDecimal roundedLongOffPeak;
+    private BigDecimal roundedShortOffPeak;
 
     @Before
     public void setUp()
@@ -39,19 +37,55 @@ public class JourneyCostCalculatorTest {
         cardId=UUID.randomUUID();
         roundedOffPeak= journeyCostCalculator.getRoundedOffPeak();
         roundedPeak= journeyCostCalculator.getRoundedPeak();
+        roundedLongPeak=journeyCostCalculator.getRoundedLongPeak();
+        roundedShortPeak=journeyCostCalculator.getRoundedShortPeak();
+        roundedLongOffPeak=journeyCostCalculator.getRoundedLongOffPeak();
+        roundedShortOffPeak=journeyCostCalculator.getRoundedShortOffPeak();
     }
     @Test
     public void TestJourneyCostPeak()
     {
-        setUpPeak();
+        setUpShortPeak();
         assertThat(journeys.size(), is(1)) ;
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedPeak);
     }
 
     @Test
+    public void TestJourneyCostLongPeak()
+    {
+        setUpLongPeak();
+        assertThat(journeys.size(), is(1)) ;
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedLongPeak);
+    }
+
+    @Test
+    public void TestJourneyCostShortPeak()
+    {
+        setUpLongPeak();
+        assertThat(journeys.size(), is(1)) ;
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortPeak);
+    }
+
+    @Test
+    public void TestJourneyCostLongOffPeak()
+    {
+        setUpLongOffPeak();
+        assertThat(journeys.size(), is(1)) ;
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedLongOffPeak);
+    }
+
+    @Test
+    public void TestJourneyCostShortOffPeak()
+    {
+        setUpLongOffPeak();
+        assertThat(journeys.size(), is(1)) ;
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortOffPeak);
+    }
+
+    @Test
     public void TestJourneyCostOffPeak()
     {
-        setUpOffPeak();
+        setUpShortOffPeak();
         assertThat(journeys.size(), is(1)) ;
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedOffPeak);
     }
@@ -59,13 +93,13 @@ public class JourneyCostCalculatorTest {
     @Test
     public void TestTwoJourneyBothCosts()
     {
-        setUpPeak();
-        setUpOffPeak();
+        setUpShortPeak();
+        setUpShortOffPeak();
         assertThat(journeys.size(), is(2));
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedOffPeak.add(roundedPeak));
     }
 
-    private void setUpPeak()
+    private void setUpLongPeak()
     {
         readerId=UUID.randomUUID();
         clock.setTime(4, 0, 0);
@@ -76,13 +110,35 @@ public class JourneyCostCalculatorTest {
         journeys.add(new Journey(start,end));
     }
 
-    private void setUpOffPeak()
+    private void setUpShortPeak()
+    {
+        readerId=UUID.randomUUID();
+        clock.setTime(6, 0, 0);
+        JourneyStart start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(6,11,32);
+        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
+        journeys.add(new Journey(start,end));
+    }
+
+    private void setUpLongOffPeak()
     {
         readerId=UUID.randomUUID();
         clock.setTime(2, 12, 0);
         JourneyStart start = new JourneyStart(cardId, readerId, clock);
         readerId=UUID.randomUUID();
         clock.setTime(3,11,32);
+        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
+        journeys.add(new Journey(start,end));
+    }
+
+    private void setUpShortOffPeak()
+    {
+        readerId=UUID.randomUUID();
+        clock.setTime(2, 12, 0);
+        JourneyStart start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(2,26,32);
         JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
         journeys.add(new Journey(start,end));
     }
