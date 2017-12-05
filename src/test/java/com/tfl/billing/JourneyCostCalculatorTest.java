@@ -121,6 +121,17 @@ public class JourneyCostCalculatorTest {
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedPeakLimit);
     }
 
+    @Test
+    public void TestOffPeakLimitCap()
+    {
+        setUpLongOffPeak();
+        setUpLongOffPeak();
+        setUpLongOffPeak();
+        setUpLongOffPeak();
+        assertThat(journeys.size(), is(4));
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedOffPeakLimit);
+    }
+
     private void setUpLongPeak()
     {
         readerId=UUID.randomUUID();

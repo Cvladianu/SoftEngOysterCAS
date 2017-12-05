@@ -60,3 +60,5 @@ This was due to start.time() providing a long value, which could not be stored i
 26. We also detected a bug in our code. For journeys which lasted a fix number of seconds, the cost would not be properly calculated. We solved that by adding a 0 to the end if this was the case, and made one test case for this particular scenario.
 
 27. Refactored getting the journeys for a customer into another method JournyesFor (from totalJourniesFor)
+
+28. Added last functionality using TDD, and ensures it works with some examples
