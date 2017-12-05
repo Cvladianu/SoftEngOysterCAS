@@ -67,7 +67,6 @@ public class JourneyCostCalculator {
             journeyPrice=SHORT_PEAK_JOURNEY_PRICE;
             if(longJourney(journey))
             {
-                System.out.println("Short peak");
                 journeyPrice=LONG_PEAK_JOURNEY_PRICE;
             }
         }
@@ -76,7 +75,6 @@ public class JourneyCostCalculator {
             journeyPrice=SHORT_OFF_PEAK_JOURNEY_PRICE;
             if(longJourney(journey))
             {
-                System.out.println("Short off peak");
                 journeyPrice=LONG_OFF_PEAK_JOURNEY_PRICE;
             }
         }
@@ -89,6 +87,10 @@ public class JourneyCostCalculator {
 
     private boolean longJourney(Journey journey) {
         String durationMinutes=journey.durationMinutes();
+        //appends a 0 if nb of seconds is 0, becuase in this scenario string looks like "abc:0" instead of "abc:00"
+        //nbSeconds%60 yields the accurate number of seconds
+        if(journey.durationSeconds()%60==0)
+            durationMinutes+="0";
         System.out.println(durationMinutes);
 
         if(durationMinutes.length()==longJourneyDelimitator.length())

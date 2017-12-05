@@ -129,13 +129,14 @@ public class TravelTrackerTest {
     }
     //to delete the crap below
     @Test
-    public void TestJourneyCostPeak()
+    public void TestJourneyCostLongPeak()
     {
         ControllableClock clock = new ControllableClock();
         ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
         CustomersDatabase md = context.mock(CustomersDatabase.class);
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
+        JourneyCostCalculator journeyCostCalculator= new JourneyCostCalculator();
 
         cardId=UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
         readerId=UUID.randomUUID();
@@ -160,18 +161,19 @@ public class TravelTrackerTest {
         //assertThat(md.getCustomers().size(), is(1));
         travelTracker.chargeAccounts();
 
-        assertEquals( roundToNearestPenny(new BigDecimal(3.20)), paymentSystem.getTotal());
+        assertEquals( journeyCostCalculator.getRoundedLongPeak(), paymentSystem.getTotal());
         context.assertIsSatisfied();
     }
 
     @Test
-    public void TestJourneyCostOffPeak()
+    public void TestJourneyCostLongOffPeak()
     {
         ControllableClock clock = new ControllableClock();
         ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
         CustomersDatabase md = context.mock(CustomersDatabase.class);
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
+        JourneyCostCalculator journeyCostCalculator= new JourneyCostCalculator();
 
         cardId=UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
         readerId=UUID.randomUUID();
@@ -198,18 +200,19 @@ public class TravelTrackerTest {
         //assertThat(md.getCustomers().size(), is(1));
         travelTracker.chargeAccounts();
 
-        assertEquals( roundToNearestPenny(new BigDecimal(2.40)), paymentSystem.getTotal());
+        assertEquals(journeyCostCalculator.getRoundedLongOffPeak(), paymentSystem.getTotal());
         context.assertIsSatisfied();
     }
 
     @Test
-    public void TestTwoJourneyBothCosts()
+    public void TestTwoJourneyBothLong()
     {
         ControllableClock clock = new ControllableClock();
         ControllablePaymentSystem paymentSystem = new ControllablePaymentSystem();
         CustomersDatabase md = context.mock(CustomersDatabase.class);
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
+        JourneyCostCalculator journeyCostCalculator= new JourneyCostCalculator();
 
         cardId=UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
         readerId=UUID.randomUUID();
@@ -244,7 +247,7 @@ public class TravelTrackerTest {
         //assertThat(md.getCustomers().size(), is(1));
         travelTracker.chargeAccounts();
 
-        assertEquals( roundToNearestPenny(new BigDecimal(5.60)), paymentSystem.getTotal());
+        assertEquals(journeyCostCalculator.getRoundedLongOffPeak().add(journeyCostCalculator.getRoundedLongPeak()), paymentSystem.getTotal());
         context.assertIsSatisfied();
     }
 

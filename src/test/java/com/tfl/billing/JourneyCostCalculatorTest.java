@@ -42,13 +42,6 @@ public class JourneyCostCalculatorTest {
         roundedLongOffPeak=journeyCostCalculator.getRoundedLongOffPeak();
         roundedShortOffPeak=journeyCostCalculator.getRoundedShortOffPeak();
     }
-    @Test
-    public void TestJourneyCostPeak()
-    {
-        setUpShortPeak();
-        assertThat(journeys.size(), is(1)) ;
-        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedPeak);
-    }
 
     @Test
     public void TestJourneyCostLongPeak()
@@ -83,20 +76,39 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestJourneyCostOffPeak()
-    {
-        setUpShortOffPeak();
-        assertThat(journeys.size(), is(1)) ;
-        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedOffPeak);
-    }
-
-    @Test
-    public void TestTwoJourneyBothCosts()
+    public void TestTwoJourneyBothShort()
     {
         setUpShortPeak();
         setUpShortOffPeak();
         assertThat(journeys.size(), is(2));
-        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedOffPeak.add(roundedPeak));
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortOffPeak.add(roundedShortPeak));
+    }
+
+    @Test
+    public void TestTwoJourneyBothLong()
+    {
+        setUpLongPeak();
+        setUpLongOffPeak();
+        assertThat(journeys.size(), is(2));
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedLongOffPeak.add(roundedLongPeak));
+    }
+
+    @Test
+    public void TestOneShortPeakOneLongOffPeak()
+    {
+        setUpShortPeak();
+        setUpLongOffPeak();
+        assertThat(journeys.size(), is(2));
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedLongOffPeak.add(roundedShortPeak));
+    }
+
+    @Test
+    public void TestOneLongPeakOneShortOffPeak()
+    {
+        setUpLongPeak();
+        setUpShortOffPeak();
+        assertThat(journeys.size(), is(2));
+        assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortOffPeak.add(roundedLongPeak));
     }
 
     private void setUpLongPeak()
