@@ -34,7 +34,7 @@ public class JourneyCostCalculator {
         return roundToNearestPenny(PEAK_JOURNEY_PRICE);
     }
 
-    public BigDecimal customerTotalFor(List<Journey> journeys)
+   /* public BigDecimal customerTotalFor(List<Journey> journeys)
     {
         BigDecimal customerTotal = new BigDecimal(0);
         for (Journey journey : journeys) {
@@ -46,9 +46,9 @@ public class JourneyCostCalculator {
         }
 
         return roundToNearestPenny(customerTotal);
-    }
+    }*/
 
-    /*public BigDecimal customerTotalFor(List<Journey> journeys)
+    public BigDecimal customerTotalFor(List<Journey> journeys)
     {
         BigDecimal customerTotal = new BigDecimal(0);
 
@@ -57,7 +57,7 @@ public class JourneyCostCalculator {
             customerTotal = customerTotal.add(getJourneyPrice(journey));
         }
         return roundToNearestPenny(customerTotal);
-    }*/
+    }
 
 
     public BigDecimal getJourneyPrice(Journey journey)
