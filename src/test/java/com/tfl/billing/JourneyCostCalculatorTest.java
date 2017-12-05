@@ -21,8 +21,6 @@ public class JourneyCostCalculatorTest {
     private ControllableClock clock;
     private JourneyCostCalculator journeyCostCalculator;
     private List<Journey> journeys;
-    private BigDecimal roundedOffPeak;
-    private BigDecimal roundedPeak;
     private BigDecimal roundedLongPeak;
     private BigDecimal roundedShortPeak;
     private BigDecimal roundedLongOffPeak;
@@ -35,8 +33,6 @@ public class JourneyCostCalculatorTest {
         journeyCostCalculator= new JourneyCostCalculator();
         journeys= new ArrayList<Journey>();
         cardId=UUID.randomUUID();
-        roundedOffPeak= journeyCostCalculator.getRoundedOffPeak();
-        roundedPeak= journeyCostCalculator.getRoundedPeak();
         roundedLongPeak=journeyCostCalculator.getRoundedLongPeak();
         roundedShortPeak=journeyCostCalculator.getRoundedShortPeak();
         roundedLongOffPeak=journeyCostCalculator.getRoundedLongOffPeak();

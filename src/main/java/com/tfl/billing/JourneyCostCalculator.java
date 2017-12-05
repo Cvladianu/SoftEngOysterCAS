@@ -11,9 +11,6 @@ import java.util.List;
  * Created by cosmi_owugxv5 on 12/4/2017.
  */
 public class JourneyCostCalculator {
-
-    static final BigDecimal OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.40);
-    static final BigDecimal PEAK_JOURNEY_PRICE = new BigDecimal(3.20);
     static final BigDecimal LONG_PEAK_JOURNEY_PRICE = new BigDecimal(3.80);
     static final BigDecimal SHORT_PEAK_JOURNEY_PRICE = new BigDecimal(2.90);
     static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
@@ -22,31 +19,6 @@ public class JourneyCostCalculator {
 
     public JourneyCostCalculator() {
     }
-
-    public BigDecimal getRoundedOffPeak()
-    {
-
-        return roundToNearestPenny(OFF_PEAK_JOURNEY_PRICE);
-    }
-
-    public BigDecimal getRoundedPeak()
-    {
-        return roundToNearestPenny(PEAK_JOURNEY_PRICE);
-    }
-
-   /* public BigDecimal customerTotalFor(List<Journey> journeys)
-    {
-        BigDecimal customerTotal = new BigDecimal(0);
-        for (Journey journey : journeys) {
-            BigDecimal journeyPrice = OFF_PEAK_JOURNEY_PRICE;
-            if (peak(journey)) {
-                journeyPrice = PEAK_JOURNEY_PRICE;
-            }
-            customerTotal = customerTotal.add(journeyPrice);
-        }
-
-        return roundToNearestPenny(customerTotal);
-    }*/
 
     public BigDecimal customerTotalFor(List<Journey> journeys)
     {
@@ -58,7 +30,6 @@ public class JourneyCostCalculator {
         }
         return roundToNearestPenny(customerTotal);
     }
-
 
     public BigDecimal getJourneyPrice(Journey journey)
     {

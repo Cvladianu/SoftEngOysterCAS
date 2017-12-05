@@ -54,3 +54,5 @@ This was due to start.time() providing a long value, which could not be stored i
 23. Created more tests, created alternative method for calculating costs for a customer
 
 24. Changed tests with to the new functionality (long and short journeys) in traveltracker, journeyCost, chargerTest, added some more tests
+
+25. All tests passed (didn't change functionality), so removed the previous parts in the tests and code (previous way of calculating costs). also refactored calculating costs, creating a method that provides the cost (usability). Removed code did not break anything.
