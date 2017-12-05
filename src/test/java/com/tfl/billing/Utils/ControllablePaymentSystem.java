@@ -8,13 +8,17 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class ControllablePaymentSystem implements PaymentSystem {
-    BigDecimal total = new BigDecimal(0);
+    private BigDecimal totalBill;
+    private Customer customer;
+    private List<Journey> journeys;
     @Override
     public void charge(Customer customer, List<Journey> journeys, BigDecimal totalBill) {
-        total=totalBill;
+        this.totalBill=totalBill;
+        this.customer=customer;
+        this.journeys=journeys;
     }
 
     public BigDecimal getTotal() {
-        return total;
+        return totalBill;
     }
 }
