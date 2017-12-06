@@ -17,7 +17,8 @@ public class JourneyCostCalculator {
     static final BigDecimal SHORT_PEAK_JOURNEY_PRICE = new BigDecimal(2.90);
     static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
     static final BigDecimal SHORT_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(1.60);
-    static final String longJourneyDelimitator="25:00";
+    //static final String longJourneyDelimitator="25:00";
+    static final long longJourneyDelimitator=25*60;
     private boolean isPeak;
 
     public JourneyCostCalculator() {
@@ -78,18 +79,9 @@ public class JourneyCostCalculator {
     }
 
     private boolean longJourney(Journey journey) {
-        String durationMinutes=journey.durationMinutes();
-        //appends a 0 if nb of seconds is 0, becuase in this scenario string looks like "abc:0" instead of "abc:00"
-        //nbSeconds%60 yields the accurate number of seconds
-        if(journey.durationSeconds()%60==0)
-            durationMinutes+="0";
-       //System.out.println(durationMinutes);
+        long durationSeconds=journey.durationSeconds();
 
-        if(durationMinutes.length()==longJourneyDelimitator.length())
-        {
-            return durationMinutes.compareTo(longJourneyDelimitator)>=0;
-        }
-        return durationMinutes.length()>longJourneyDelimitator.length();
+        return durationSeconds>=longJourneyDelimitator;
 
     }
 

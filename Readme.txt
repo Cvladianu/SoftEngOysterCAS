@@ -62,3 +62,7 @@ This was due to start.time() providing a long value, which could not be stored i
 27. Refactored getting the journeys for a customer into another method JournyesFor (from totalJourniesFor)
 
 28. Added last functionality using TDD, and ensures it works with some examples
+
+29. Refactored long tests from traveltracker into another test class for system tests.
+
+30. Refactored the method that checks if a journey is long or short; Previous one had a weird implementation with strings, and the one with a long (journey.durationSeconds) is far more reliable, checking if it's bigger or equal than 25*60. All tests pass, so change should be good.
