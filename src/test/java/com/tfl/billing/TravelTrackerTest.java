@@ -5,18 +5,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.oyster.OysterCard;
 import com.tfl.billing.Adaptors.AdaptorDatabase;
 import com.tfl.billing.Adaptors.AdaptorPaymentSystem;
 import com.tfl.billing.Adaptors.CustomersDatabase;
-import com.tfl.billing.Utils.ControllableClock;
-import com.tfl.billing.Utils.ControllablePaymentSystem;
 import com.tfl.external.Customer;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -26,32 +23,40 @@ public class TravelTrackerTest {
 
     JUnitRuleMockery context = new JUnitRuleMockery();
 
-    TravelTracker travelTracker;
-    UUID cardId;
-    UUID readerId;
-    List<Customer> customers = new ArrayList<Customer>();
+    private UUID cardId1;
+    private UUID cardId2;
+    private UUID readerId;
+    private TravelTracker travelTracker;
+    private List<JourneyEvent> eventLog;
+    private Set<UUID> currentlyTravelling;
+    private CustomersDatabase md;
+
+    @Before
+    public void setUp()
+    {
+        cardId1 =UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
+        readerId=UUID.randomUUID();
+        eventLog = new ArrayList<>();
+        currentlyTravelling = new HashSet<>();
+        md = context.mock(CustomersDatabase.class);
+    }
 
     @Test (expected = UnknownOysterCardException.class)
     public void throwsExceptionIfUnknownCustomerTriesToScanCard()
     {
         travelTracker= new TravelTracker();
-        cardId=UUID.fromString("267b3378-678d-4da7-825e-3252982d48ab");
-        readerId=UUID.randomUUID();
-
-        travelTracker.cardScanned(cardId, readerId);
+        travelTracker.cardScanned(cardId1, readerId);
     }
 
     @Test
     public void exceptionHasSuggestiveMessage()
     {
         travelTracker= new TravelTracker();
-        cardId=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
-        readerId=UUID.randomUUID();
 
         try {
-            travelTracker.cardScanned(cardId, readerId);
+            travelTracker.cardScanned(cardId1, readerId);
         }catch(UnknownOysterCardException e) {
-            String s="Oyster Card does not correspond to a known customer. Id: " + cardId;
+            String s="Oyster Card does not correspond to a known customer. Id: " + cardId1;
             assertEquals(e.getMessage(), s);
         };
     }
@@ -59,22 +64,14 @@ public class TravelTrackerTest {
     @Test
     public void keepsTrackOfTravellingCustomer()
     {
-        CustomersDatabase md = context.mock(CustomersDatabase.class);
-
-        cardId=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
-        readerId=UUID.randomUUID();
-
-        List<JourneyEvent> eventLog = new ArrayList<>();
-        Set<UUID> currentlyTravelling = new HashSet<>();
-
         travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, AdaptorPaymentSystem.getInstance());
 
         context.checking(new Expectations() { {
-            oneOf(md).isRegisteredId(cardId); will(returnValue(true));
+            oneOf(md).isRegisteredId(cardId1); will(returnValue(true));
         }});
 
-       travelTracker.cardScanned(cardId, readerId);
-       assertTrue(currentlyTravelling.contains(cardId));
+       travelTracker.cardScanned(cardId1, readerId);
+       assertTrue(currentlyTravelling.contains(cardId1));
        assertFalse(eventLog.isEmpty());
 
        context.assertIsSatisfied();
@@ -83,15 +80,8 @@ public class TravelTrackerTest {
     @Test
     public void keepsTrackOfMoreTravellingCustomers()
     {
-        CustomersDatabase md = context.mock(CustomersDatabase.class);
-
-        UUID cardId1=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
-        UUID cardId2=UUID.fromString("89adbd1c-4de6-40e5-98bc-b3315c6873f2");
+        cardId2=UUID.fromString("89adbd1c-4de6-40e5-98bc-b3315c6873f2");
         readerId=UUID.randomUUID();
-
-        List<JourneyEvent> eventLog = new ArrayList<>();
-        Set<UUID> currentlyTravelling = new HashSet<>();
-
         travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, AdaptorPaymentSystem.getInstance());
 
         context.checking(new Expectations() { {
@@ -117,16 +107,11 @@ public class TravelTrackerTest {
     @Test
     public void discardsTravelingCustomerAfterSecondScan()
     {
-        cardId=UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
-        readerId=UUID.randomUUID();
-
-        List<JourneyEvent> eventLog = new ArrayList<>();
-        Set<UUID> currentlyTravelling = new HashSet<>();
-        currentlyTravelling.add(cardId);
+        currentlyTravelling.add(cardId1);
         travelTracker= new TravelTracker(eventLog, currentlyTravelling, AdaptorDatabase.getInstance(), AdaptorPaymentSystem.getInstance());
 
-        travelTracker.cardScanned(cardId, readerId);
-        assertFalse(currentlyTravelling.contains(cardId)) ;
+        travelTracker.cardScanned(cardId1, readerId);
+        assertFalse(currentlyTravelling.contains(cardId1)) ;
         assertFalse(eventLog.isEmpty());
     }
 
