@@ -9,10 +9,10 @@ import java.util.List;
 /**
  * Created by cosmi_owugxv5 on 12/5/2017.
  */
-public class Charger {
+public class CustomerCharger {
     private JourneyCostCalculator journeyCostCalculator;
 
-    public Charger()
+    public CustomerCharger()
     {
         this.journeyCostCalculator=new JourneyCostCalculator();
     }

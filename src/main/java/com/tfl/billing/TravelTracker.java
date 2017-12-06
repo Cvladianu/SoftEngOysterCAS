@@ -19,7 +19,7 @@ public class TravelTracker implements ScanListener {
     private final Set<UUID> currentlyTravelling;
     private final CustomersDatabase customersDatabase;
     private final PaymentSystem paymentSystem;
-    private final Charger charger;
+    private final CustomerCharger customerCharger;
 
 
     public TravelTracker()
@@ -28,7 +28,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling= new HashSet<>();
         this.customersDatabase = AdaptorDatabase.getInstance();
         this.paymentSystem= AdaptorPaymentSystem.getInstance();
-        this.charger= new Charger();
+        this.customerCharger = new CustomerCharger();
     }
     //Dependency injection
     public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase)
@@ -37,7 +37,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling=currentlyTravelling;
         this.customersDatabase = customersDatabase;
         this.paymentSystem=AdaptorPaymentSystem.getInstance();
-        this.charger= new Charger();
+        this.customerCharger = new CustomerCharger();
     }
 
     public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase, PaymentSystem adaptorPaymentSystem)
@@ -46,7 +46,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling=currentlyTravelling;
         this.customersDatabase = customersDatabase;
         this.paymentSystem=adaptorPaymentSystem;
-        this.charger= new Charger();
+        this.customerCharger = new CustomerCharger();
     }
 
     public TravelTracker(List<JourneyEvent> eventLog, Set<UUID> currentlyTravelling) {
@@ -54,7 +54,7 @@ public class TravelTracker implements ScanListener {
         this.currentlyTravelling=currentlyTravelling;
         this.customersDatabase =AdaptorDatabase.getInstance();
         this.paymentSystem=AdaptorPaymentSystem.getInstance();
-        this.charger= new Charger();
+        this.customerCharger = new CustomerCharger();
     }
 
     public void chargeAccounts() {
@@ -69,7 +69,7 @@ public class TravelTracker implements ScanListener {
     private void totalJourneysFor(Customer customer) {
         List<Journey> journeys = journeysFor(customer);
 
-        charger.charge(customer, journeys, paymentSystem);
+        customerCharger.charge(customer, journeys, paymentSystem);
     }
 
     private List<Journey> journeysFor(Customer customer)

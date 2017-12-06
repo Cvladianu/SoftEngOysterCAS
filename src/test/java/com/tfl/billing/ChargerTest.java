@@ -23,7 +23,7 @@ public class ChargerTest {
     private JourneyCostCalculator journeyCostCalculator;
     private List<Journey> journeys;
     private List<Customer> customers;
-    private Charger charger;
+    private CustomerCharger customerCharger;
     private Customer customer;
     private ControllablePaymentSystem paymentSystem;
 
@@ -36,7 +36,7 @@ public class ChargerTest {
         cardId=UUID.randomUUID();
         customers = new ArrayList<Customer>();
         customer= new Customer("Fred Bloggs", new OysterCard("38400000-8cf0-11bd-b23e-10b96e4ef00d"));
-        charger= new Charger();
+        customerCharger = new CustomerCharger();
         paymentSystem = new ControllablePaymentSystem();
     }
 
@@ -52,7 +52,7 @@ public class ChargerTest {
         JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
         journeys.add(new Journey(start,end));
 
-        charger.charge(customer, journeys, paymentSystem);
+        customerCharger.charge(customer, journeys, paymentSystem);
 
         assertEquals(customer, paymentSystem.getCustomer());
         assertEquals(journeys, paymentSystem.getJourneys());
@@ -79,7 +79,7 @@ public class ChargerTest {
         end = new JourneyEnd(cardId, readerId, clock);
         journeys.add(new Journey(start,end));
 
-        charger.charge(customer, journeys, paymentSystem);
+        customerCharger.charge(customer, journeys, paymentSystem);
 
         assertEquals(customer, paymentSystem.getCustomer());
         assertEquals(journeys, paymentSystem.getJourneys());
