@@ -68,3 +68,9 @@ This was due to start.time() providing a long value, which could not be stored i
 30. Refactored the method that checks if a journey is long or short; Previous one had a weird implementation with strings, and the one with a long (journey.durationSeconds) is far more reliable, checking if it's bigger or equal than 25*60. All tests pass, so change should be good.
 
 31. Refactored Charger into CustomerCharger for name consistency.
+
+*To note that we do not specialise the TravelTracker constructor (as in use ControllablePaymentSystem) for more reasons:
+to avoid any kind of circular dependency
+to allow more testing implementations, with other controllers/implementations of the classes used
+
+32. Refactored out redundant TravelTracker constructors (replacing occurances in tests accordingly, ie. with AdaptorDatabase.getInstance, so on)

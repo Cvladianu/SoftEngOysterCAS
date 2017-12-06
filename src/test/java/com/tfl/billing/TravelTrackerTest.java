@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.oyster.OysterCard;
+import com.tfl.billing.Adaptors.AdaptorDatabase;
+import com.tfl.billing.Adaptors.AdaptorPaymentSystem;
 import com.tfl.billing.Adaptors.CustomersDatabase;
 import com.tfl.billing.Utils.ControllableClock;
 import com.tfl.billing.Utils.ControllablePaymentSystem;
@@ -65,7 +67,7 @@ public class TravelTrackerTest {
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
 
-        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md);
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, AdaptorPaymentSystem.getInstance());
 
         context.checking(new Expectations() { {
             oneOf(md).isRegisteredId(cardId); will(returnValue(true));
@@ -90,7 +92,7 @@ public class TravelTrackerTest {
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
 
-        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md);
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, AdaptorPaymentSystem.getInstance());
 
         context.checking(new Expectations() { {
             oneOf(md).isRegisteredId(cardId1); will(returnValue(true));
@@ -121,7 +123,7 @@ public class TravelTrackerTest {
         List<JourneyEvent> eventLog = new ArrayList<>();
         Set<UUID> currentlyTravelling = new HashSet<>();
         currentlyTravelling.add(cardId);
-        travelTracker= new TravelTracker(eventLog, currentlyTravelling);
+        travelTracker= new TravelTracker(eventLog, currentlyTravelling, AdaptorDatabase.getInstance(), AdaptorPaymentSystem.getInstance());
 
         travelTracker.cardScanned(cardId, readerId);
         assertFalse(currentlyTravelling.contains(cardId)) ;

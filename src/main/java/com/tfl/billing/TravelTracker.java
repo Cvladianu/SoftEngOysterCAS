@@ -7,13 +7,9 @@ import com.tfl.billing.Adaptors.CustomersDatabase;
 import com.tfl.billing.Adaptors.PaymentSystem;
 import com.tfl.external.Customer;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 public class TravelTracker implements ScanListener {
-
-    static final BigDecimal OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.40);
-    static final BigDecimal PEAK_JOURNEY_PRICE = new BigDecimal(3.20);
 
     private final List<JourneyEvent> eventLog;
     private final Set<UUID> currentlyTravelling;
@@ -31,29 +27,12 @@ public class TravelTracker implements ScanListener {
         this.customerCharger = new CustomerCharger();
     }
     //Dependency injection
-    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase)
-    {
-        this.eventLog=eventlog;
-        this.currentlyTravelling=currentlyTravelling;
-        this.customersDatabase = customersDatabase;
-        this.paymentSystem=AdaptorPaymentSystem.getInstance();
-        this.customerCharger = new CustomerCharger();
-    }
-
     public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase, PaymentSystem adaptorPaymentSystem)
     {
         this.eventLog=eventlog;
         this.currentlyTravelling=currentlyTravelling;
         this.customersDatabase = customersDatabase;
         this.paymentSystem=adaptorPaymentSystem;
-        this.customerCharger = new CustomerCharger();
-    }
-
-    public TravelTracker(List<JourneyEvent> eventLog, Set<UUID> currentlyTravelling) {
-        this.eventLog=eventLog;
-        this.currentlyTravelling=currentlyTravelling;
-        this.customersDatabase =AdaptorDatabase.getInstance();
-        this.paymentSystem=AdaptorPaymentSystem.getInstance();
         this.customerCharger = new CustomerCharger();
     }
 
