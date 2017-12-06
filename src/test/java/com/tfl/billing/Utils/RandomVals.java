@@ -1,4 +1,4 @@
-package com.tfl.billing;
+package com.tfl.billing.Utils;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
