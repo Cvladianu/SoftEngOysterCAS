@@ -1,6 +1,6 @@
-package com.tfl.billing.Utils;
+package com.tfl.billing.utils;
 
-import com.tfl.billing.Adaptors.PaymentSystem;
+import com.tfl.billing.adaptors.PaymentSystem;
 import com.tfl.billing.Journey;
 import com.tfl.external.Customer;
 

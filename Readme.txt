@@ -84,3 +84,5 @@ to allow more testing implementations, with other controllers/implementations of
 36. in controllerclock epoch -> epochMilli for consistency;
 
 37. moved unit tests in a UnitTests package.
+
+38. used codacy to asses our code, found some issues in package naming (using capitals at beginning) and with variables which were not private, solving them as such

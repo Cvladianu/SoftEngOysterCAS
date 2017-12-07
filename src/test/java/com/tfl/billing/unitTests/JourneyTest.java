@@ -1,12 +1,12 @@
-package com.tfl.billing.UnitTests;
+package com.tfl.billing.unitTests;
 
-import com.tfl.billing.Adaptors.SystemClock;
+import com.tfl.billing.adaptors.SystemClock;
 import com.tfl.billing.Clock;
 import com.tfl.billing.Journey;
 import com.tfl.billing.JourneyEnd;
 import com.tfl.billing.JourneyStart;
-import com.tfl.billing.Utils.ControllableClock;
-import com.tfl.billing.Utils.RandomVals;
+import com.tfl.billing.utils.ControllableClock;
+import com.tfl.billing.utils.RandomVals;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;

@@ -1,6 +1,5 @@
-package com.tfl.billing.Utils;
+package com.tfl.billing.utils;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

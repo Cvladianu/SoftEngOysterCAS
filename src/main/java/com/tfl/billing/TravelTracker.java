@@ -1,10 +1,10 @@
 package com.tfl.billing;
 
 import com.oyster.*;
-import com.tfl.billing.Adaptors.AdaptorDatabase;
-import com.tfl.billing.Adaptors.AdaptorPaymentSystem;
-import com.tfl.billing.Adaptors.CustomersDatabase;
-import com.tfl.billing.Adaptors.PaymentSystem;
+import com.tfl.billing.adaptors.AdaptorDatabase;
+import com.tfl.billing.adaptors.AdaptorPaymentSystem;
+import com.tfl.billing.adaptors.CustomersDatabase;
+import com.tfl.billing.adaptors.PaymentSystem;
 import com.tfl.external.Customer;
 
 import java.util.*;

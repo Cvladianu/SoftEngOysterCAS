@@ -11,14 +11,13 @@ import java.util.List;
  * Created by cosmi_owugxv5 on 12/4/2017.
  */
 public class JourneyCostCalculator {
-    static final BigDecimal OFF_PEAK_LIMIT = new BigDecimal(7);
-    static final BigDecimal PEAK_LIMIT = new BigDecimal(9);
-    static final BigDecimal LONG_PEAK_JOURNEY_PRICE = new BigDecimal(3.80);
-    static final BigDecimal SHORT_PEAK_JOURNEY_PRICE = new BigDecimal(2.90);
-    static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
-    static final BigDecimal SHORT_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(1.60);
-    //static final String longJourneyDelimitator="25:00";
-    static final long longJourneyDelimitator=25*60;
+    private static final BigDecimal OFF_PEAK_LIMIT = new BigDecimal(7);
+    private static final BigDecimal PEAK_LIMIT = new BigDecimal(9);
+    private static final BigDecimal LONG_PEAK_JOURNEY_PRICE = new BigDecimal(3.80);
+    private static final BigDecimal SHORT_PEAK_JOURNEY_PRICE = new BigDecimal(2.90);
+    private static final BigDecimal LONG_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(2.70);
+    private static final BigDecimal SHORT_OFF_PEAK_JOURNEY_PRICE = new BigDecimal(1.60);
+    private static final long longJourneyDelimitator=25*60;
     private boolean isPeak;
 
     public JourneyCostCalculator() {

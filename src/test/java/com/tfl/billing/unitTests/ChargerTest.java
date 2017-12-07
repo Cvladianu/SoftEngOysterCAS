@@ -1,9 +1,9 @@
-package com.tfl.billing.UnitTests;
+package com.tfl.billing.unitTests;
 
 import com.oyster.OysterCard;
 import com.tfl.billing.*;
-import com.tfl.billing.Utils.ControllableClock;
-import com.tfl.billing.Utils.ControllablePaymentSystem;
+import com.tfl.billing.utils.ControllableClock;
+import com.tfl.billing.utils.ControllablePaymentSystem;
 import com.tfl.external.Customer;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;

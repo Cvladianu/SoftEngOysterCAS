@@ -1,7 +1,6 @@
-package com.tfl.billing.Adaptors;
+package com.tfl.billing.adaptors;
 
 import com.tfl.external.Customer;
-import com.tfl.external.CustomerDatabase;
 
 import java.util.List;
 import java.util.UUID;

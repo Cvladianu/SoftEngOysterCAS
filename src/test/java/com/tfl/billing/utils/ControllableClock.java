@@ -1,4 +1,4 @@
-package com.tfl.billing.Utils;
+package com.tfl.billing.utils;
 
 import com.tfl.billing.Clock;
 
