@@ -51,7 +51,7 @@ public class TravelTrackerSysTest {
     }
 
     @Test
-    public void TestJourneyCostLongPeak()
+    public void testJourneyCostLongPeak()
     {
         setUpLongPeak();
 
@@ -68,7 +68,7 @@ public class TravelTrackerSysTest {
     }
 
     @Test
-    public void TestJourneyCostLongOffPeak()
+    public void testJourneyCostLongOffPeak()
     {
         setUpLongOffPeak();
         //initialise customerList
@@ -86,7 +86,7 @@ public class TravelTrackerSysTest {
     }
 
     @Test
-    public void TestTwoJourneyBothLong()
+    public void testTwoJourneyBothLong()
     {
         setUpLongPeak();
         setUpLongOffPeak();
@@ -115,18 +115,6 @@ public class TravelTrackerSysTest {
         eventLog.add(end);
     }
 
-    private void setUpShortPeak()
-    {
-        readerId=UUID.randomUUID();
-        clock.setTime(6, 0, 0);
-        start = new JourneyStart(cardId, readerId, clock);
-        readerId=UUID.randomUUID();
-        clock.setTime(6,11,32);
-        end = new JourneyEnd(cardId, readerId, clock);
-        eventLog.add(start);
-        eventLog.add(end);
-    }
-
     private void setUpLongOffPeak()
     {
         readerId=UUID.randomUUID();
@@ -134,6 +122,19 @@ public class TravelTrackerSysTest {
         start = new JourneyStart(cardId, readerId, clock);
         readerId=UUID.randomUUID();
         clock.setTime(2,37,5);
+        end = new JourneyEnd(cardId, readerId, clock);
+        eventLog.add(start);
+        eventLog.add(end);
+    }
+
+    //commented as currently not used, but might be useful in the future
+    /*private void setUpShortPeak()
+    {
+        readerId=UUID.randomUUID();
+        clock.setTime(6, 0, 0);
+        start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(6,11,32);
         end = new JourneyEnd(cardId, readerId, clock);
         eventLog.add(start);
         eventLog.add(end);
@@ -149,5 +150,5 @@ public class TravelTrackerSysTest {
         end = new JourneyEnd(cardId, readerId, clock);
         eventLog.add(start);
         eventLog.add(end);
-    }
+    }*/
 }
