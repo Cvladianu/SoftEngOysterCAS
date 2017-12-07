@@ -19,7 +19,7 @@ public class CustomerCharger {
 
     public void charge(Customer customer, List<Journey> journeys, PaymentSystem paymentSystem)
     {
-        BigDecimal totalBill= journeyCostCalculator.customerTotalFor(journeys);;
+        BigDecimal totalBill= journeyCostCalculator.customerTotalFor(journeys);
         paymentSystem.charge(customer, journeys, totalBill);
     }
 }

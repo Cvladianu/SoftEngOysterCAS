@@ -6,10 +6,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by cosmi_owugxv5 on 11/28/2017.
  */
 public class RandomVals {
-    private int min=1;
-    private int max=6000;
+    private int min;
+    private int max;
 
     public RandomVals() {
+        min=1;
+        max=6000;
     }
 
     private long randomNum(int min, int max)

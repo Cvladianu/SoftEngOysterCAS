@@ -1,6 +1,5 @@
 package com.tfl.billing.tests.unit;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -60,7 +59,7 @@ public class TravelTrackerTest {
         }catch(UnknownOysterCardException e) {
             String s="Oyster Card does not correspond to a known customer. Id: " + cardId1;
             assertEquals(e.getMessage(), s);
-        };
+        }
     }
 
     @Test
