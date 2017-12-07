@@ -9,6 +9,7 @@ import com.tfl.external.Customer;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.*;
@@ -19,8 +20,8 @@ import static org.junit.Assert.assertEquals;
  * Created by cosmi_owugxv5 on 12/6/2017.
  */
 public class TravelTrackerSysTest {
-
-    JUnitRuleMockery context = new JUnitRuleMockery();
+    @Rule
+    public JUnitRuleMockery context = new JUnitRuleMockery();
 
     private CustomersDatabase md;
     private UUID cardId;
