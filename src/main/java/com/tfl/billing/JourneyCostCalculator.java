@@ -29,7 +29,6 @@ public class JourneyCostCalculator {
         BigDecimal customerTotal = new BigDecimal(0);
         this.isPeak=false;
         for (Journey journey : journeys) {
-
             customerTotal = customerTotal.add(getJourneyPrice(journey));
         }
         customerTotal=withLimits(customerTotal);
@@ -38,7 +37,6 @@ public class JourneyCostCalculator {
 
     public BigDecimal getJourneyPrice(Journey journey)
     {
-
         BigDecimal journeyPrice;
         if (peak(journey)) {
             this.isPeak=true;
