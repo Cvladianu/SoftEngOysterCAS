@@ -1,4 +1,4 @@
-package com.tfl.billing.unitTests;
+package com.tfl.billing.tests.unit;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
@@ -14,6 +14,7 @@ import com.tfl.billing.UnknownOysterCardException;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.*;
@@ -22,11 +23,10 @@ import java.util.*;
  * Created by cosmi_owugxv5 on 11/20/2017.
  */
 public class TravelTrackerTest {
-
-    JUnitRuleMockery context = new JUnitRuleMockery();
+    @Rule
+    private JUnitRuleMockery context = new JUnitRuleMockery();
 
     private UUID cardId1;
-    private UUID cardId2;
     private UUID readerId;
     private TravelTracker travelTracker;
     private List<JourneyEvent> eventLog;
@@ -82,6 +82,7 @@ public class TravelTrackerTest {
     @Test
     public void keepsTrackOfMoreTravellingCustomers()
     {
+        UUID cardId2;
         cardId2=UUID.fromString("89adbd1c-4de6-40e5-98bc-b3315c6873f2");
         readerId=UUID.randomUUID();
         travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, AdaptorPaymentSystem.getInstance());
@@ -116,5 +117,4 @@ public class TravelTrackerTest {
         assertFalse(currentlyTravelling.contains(cardId1)) ;
         assertFalse(eventLog.isEmpty());
     }
-
 }

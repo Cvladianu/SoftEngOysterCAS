@@ -87,4 +87,7 @@ to allow more testing implementations, with other controllers/implementations of
 
 38. used codacy to asses our code, found some issues in package naming (using capitals at beginning) and with variables which were not private, solving them as such
 
-39. in controlllableClock, changed "time" variable to a local scope, as it was only used in one method. same for "now"
+39. in controlllableClock, changed "time" variable to a local scope, as it was only used in one method. same for "now".
+
+40. refactored methods in tests to begin with lower case leters, created a package for tests, with sub packages for unit and system tests.
+in travelTrackerTest, moved cardId2 to a local scope, since it is only used once (for now)

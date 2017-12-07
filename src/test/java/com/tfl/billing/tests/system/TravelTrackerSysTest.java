@@ -1,4 +1,4 @@
-package com.tfl.billing.systemTests;
+package com.tfl.billing.tests.system;
 
 import com.oyster.OysterCard;
 import com.tfl.billing.*;

@@ -1,4 +1,4 @@
-package com.tfl.billing.unitTests;
+package com.tfl.billing.tests.unit;
 
 import com.oyster.OysterCard;
 import com.tfl.billing.*;
@@ -50,7 +50,7 @@ public class ChargerTest {
     }
 
     @Test
-    public void TestChargeAmountOneJourneyLongPeak()
+    public void testChargeAmountOneJourneyLongPeak()
     {
         customerCharger.charge(customer, journeys, paymentSystem);
 
@@ -60,7 +60,7 @@ public class ChargerTest {
     }
 
     @Test
-    public void TestChargeAmountTwoJourneysLongPeakAndShortOffPeak()
+    public void testChargeAmountTwoJourneysLongPeakAndShortOffPeak()
     {
         readerId=UUID.randomUUID();
         clock.setTime(2, 12, 0);

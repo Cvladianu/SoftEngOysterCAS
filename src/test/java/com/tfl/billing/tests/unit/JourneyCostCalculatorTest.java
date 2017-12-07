@@ -1,4 +1,4 @@
-package com.tfl.billing.unitTests;
+package com.tfl.billing.tests.unit;
 
 import com.tfl.billing.Journey;
 import com.tfl.billing.JourneyCostCalculator;
@@ -48,7 +48,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestJourneyCostLongPeak()
+    public void testJourneyCostLongPeak()
     {
         setUpLongPeak();
         assertThat(journeys.size(), is(1)) ;
@@ -56,7 +56,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestJourneyCostShortPeak()
+    public void testJourneyCostShortPeak()
     {
         setUpShortPeak();
         assertThat(journeys.size(), is(1)) ;
@@ -64,7 +64,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestJourneyCostLongOffPeak()
+    public void testJourneyCostLongOffPeak()
     {
         setUpLongOffPeak();
         assertThat(journeys.size(), is(1)) ;
@@ -72,7 +72,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestJourneyCostShortOffPeak()
+    public void testJourneyCostShortOffPeak()
     {
         setUpShortOffPeak();
         assertThat(journeys.size(), is(1)) ;
@@ -80,7 +80,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestTwoJourneyBothShort()
+    public void testTwoJourneyBothShort()
     {
         setUpShortPeak();
         setUpShortOffPeak();
@@ -89,7 +89,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestTwoJourneyBothLong()
+    public void testTwoJourneyBothLong()
     {
         setUpLongPeak();
         setUpLongOffPeak();
@@ -98,7 +98,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestOneShortPeakOneLongOffPeak()
+    public void testOneShortPeakOneLongOffPeak()
     {
         setUpShortPeak();
         setUpLongOffPeak();
@@ -107,7 +107,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestOneLongPeakOneShortOffPeak()
+    public void testOneLongPeakOneShortOffPeak()
     {
         setUpLongPeak();
         setUpShortOffPeak();
@@ -115,7 +115,7 @@ public class JourneyCostCalculatorTest {
         assertEquals(journeyCostCalculator.customerTotalFor(journeys), roundedShortOffPeak.add(roundedLongPeak));
     }
     @Test
-    public void TestPeakLimitCap()
+    public void testPeakLimitCap()
     {
         setUpLongPeak();
         setUpLongPeak();
@@ -126,7 +126,7 @@ public class JourneyCostCalculatorTest {
     }
 
     @Test
-    public void TestOffPeakLimitCap()
+    public void testOffPeakLimitCap()
     {
         setUpLongOffPeak();
         setUpLongOffPeak();

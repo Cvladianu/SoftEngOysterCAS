@@ -1,4 +1,4 @@
-package com.tfl.billing.unitTests;
+package com.tfl.billing.tests.unit;
 
 import com.tfl.billing.adaptors.SystemClock;
 import com.tfl.billing.Clock;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public class JourneyTest {
     @Rule
-    public JUnitRuleMockery context = new JUnitRuleMockery();
+    private JUnitRuleMockery context = new JUnitRuleMockery();
 
     private UUID cardId;
     private UUID readerIdStart;
@@ -45,7 +45,7 @@ public class JourneyTest {
     }
 
     @Test
-    public void TestZeroSecondsJourney()
+    public void testZeroSecondsJourney()
     {
         start = new JourneyStart(cardId, readerIdStart);
         end= new JourneyEnd(cardId, readerIdEnd);
@@ -54,7 +54,7 @@ public class JourneyTest {
     }
 
     @Test
-    public void TestTwoSecondsJourney()
+    public void testTwoSecondsJourney()
     {
         start = new JourneyStart(cardId, readerIdStart);
         try {
@@ -69,7 +69,7 @@ public class JourneyTest {
     }
 
     @Test
-    public void TestDifRandom()
+    public void testDifRandom()
     {
         start=new JourneyStart(cardId, readerIdStart);
         long randomMili=randomVals.getRandomMilis();
