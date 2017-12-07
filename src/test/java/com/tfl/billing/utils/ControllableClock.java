@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class ControllableClock implements Clock {
-    private LocalDateTime time;
     private LocalDateTime now;
     private long epochMilli = System.currentTimeMillis();
     // need to set just the hour, min and seconds, as the current day, month and year will be the same
@@ -27,6 +26,7 @@ public class ControllableClock implements Clock {
     }
 
     public void setTime(int hour, int minute, int second) {
+        LocalDateTime time;
         time = LocalDateTime.of(year,month,day,hour, minute, second);
         ZoneId zoneId = ZoneId.systemDefault();
         epochMilli = time.atZone(zoneId).toInstant().toEpochMilli();

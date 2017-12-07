@@ -86,3 +86,5 @@ to allow more testing implementations, with other controllers/implementations of
 37. moved unit tests in a UnitTests package.
 
 38. used codacy to asses our code, found some issues in package naming (using capitals at beginning) and with variables which were not private, solving them as such
+
+39. in controlllableClock, changed "time" variable to a local scope, as it was only used in one method.
