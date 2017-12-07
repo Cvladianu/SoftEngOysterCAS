@@ -80,3 +80,5 @@ to allow more testing implementations, with other controllers/implementations of
 34. Refactored JourneyTest in a similar way. Added a test which uses the controllable clock, kept the previous ones for code quality check, as they have been accurately testing our code since the beginning.
 
 35. Same for ChargerTest; removed the array of customers as it was not being used in any tests. moved the creation of the first journey in the setup, as it is currently the same for both tests, and eliminates duplicate code.
+
+36. in controllerclock epoch -> epochMilli for consistency;
