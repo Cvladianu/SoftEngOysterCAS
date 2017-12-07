@@ -43,14 +43,14 @@ public class TravelTrackerTest {
     }
 
     @Test (expected = UnknownOysterCardException.class)
-    public void throwsExceptionIfUnknownCustomerTriesToScanCard()
+    public void testThrowsExceptionIfUnknownCustomerTriesToScanCard()
     {
         travelTracker= new TravelTracker();
         travelTracker.cardScanned(cardId1, readerId);
     }
 
     @Test
-    public void exceptionHasSuggestiveMessage()
+    public void testExceptionHasSuggestiveMessage()
     {
         travelTracker= new TravelTracker();
 
@@ -63,7 +63,7 @@ public class TravelTrackerTest {
     }
 
     @Test
-    public void keepsTrackOfTravellingCustomer()
+    public void testKeepsTrackOfTravellingCustomer()
     {
         travelTracker= new TravelTracker(eventLog, currentlyTravelling, md, AdaptorPaymentSystem.getInstance());
 
@@ -79,7 +79,7 @@ public class TravelTrackerTest {
     }
 
     @Test
-    public void keepsTrackOfMoreTravellingCustomers()
+    public void testKeepsTrackOfMoreTravellingCustomers()
     {
         UUID cardId2;
         cardId2=UUID.fromString("89adbd1c-4de6-40e5-98bc-b3315c6873f2");
@@ -107,7 +107,7 @@ public class TravelTrackerTest {
     }
 
     @Test
-    public void discardsTravelingCustomerAfterSecondScan()
+    public void testDiscardsTravelingCustomerAfterSecondScan()
     {
         currentlyTravelling.add(cardId1);
         travelTracker= new TravelTracker(eventLog, currentlyTravelling, AdaptorDatabase.getInstance(), AdaptorPaymentSystem.getInstance());

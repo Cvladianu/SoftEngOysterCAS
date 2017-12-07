@@ -21,12 +21,12 @@ public class JourneyCostCalculator {
 
     public BigDecimal customerTotalFor(List<Journey> journeys)
     {
-        BigDecimal customerTotal = new BigDecimal(0);
+        BigDecimal customerTotal = new BigDecimal("0");
         this.isPeak=false;
         for (Journey journey : journeys) {
             customerTotal = customerTotal.add(getJourneyPrice(journey));
         }
-        
+
         return roundToNearestPenny(withLimits(customerTotal));
     }
 
