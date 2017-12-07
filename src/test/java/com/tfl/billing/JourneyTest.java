@@ -1,6 +1,7 @@
 package com.tfl.billing;
 
 import com.tfl.billing.Adaptors.SystemClock;
+import com.tfl.billing.Utils.ControllableClock;
 import com.tfl.billing.Utils.RandomVals;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -27,15 +28,16 @@ public class JourneyTest {
     private JourneyStart start;
     private JourneyEnd end;
     private Journey journey;
-    private RandomVals randomVals= new RandomVals();
+    private RandomVals randomVals;
 
     @Before
     public void setUp()
     {
-        UUID cardId= UUID.randomUUID();
-        UUID readerIdStart= UUID.randomUUID();
-        UUID readerIdEnd= UUID.randomUUID();
+        cardId= UUID.randomUUID();
+        readerIdStart= UUID.randomUUID();
+        readerIdEnd= UUID.randomUUID();
         clock = new SystemClock();
+        randomVals= new RandomVals();
     }
 
     @Test
@@ -50,7 +52,6 @@ public class JourneyTest {
     @Test
     public void TestTwoSecondsJourney()
     {
-
         start = new JourneyStart(cardId, readerIdStart);
         try {
             Thread.sleep(2000);                 //1000 milliseconds Clock one second.
@@ -81,5 +82,19 @@ public class JourneyTest {
 
         assertThat((long) journey.durationSeconds(), is(dSeconds));
         context.assertIsSatisfied();
+    }
+
+    @Test
+    public void testJourneyControlClock()
+    {
+        ControllableClock controllableClock= new ControllableClock();
+
+        controllableClock.setTime(3,4,5);
+        start= new JourneyStart(cardId, readerIdStart, controllableClock);
+        controllableClock.setTime(4,5,6);
+        end=new JourneyEnd(cardId, readerIdEnd, controllableClock);
+        journey= new Journey(start, end);
+
+        assertThat(journey.durationSeconds(), is(3661));
     }
 }
