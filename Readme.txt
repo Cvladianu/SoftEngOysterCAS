@@ -78,3 +78,5 @@ to allow more testing implementations, with other controllers/implementations of
 33. Refactored TravelTrackerTest so the common definitions of variables are not repetead; we have made some tradeoffs, as in for some tests (such as the first two ones, some variables, such as eventLog, are not required, but does not hinder them, so the change is worth doing, especially since there are more tests using them. In the case of travelTracker definition, we left each method with its own, as some of them have different definitions, and we felt that it would be bad practice to define them twice for some tests(if we also put them into the setup)
 
 34. Refactored JourneyTest in a similar way. Added a test which uses the controllable clock, kept the previous ones for code quality check, as they have been accurately testing our code since the beginning.
+
+35. Same for ChargerTest; removed the array of customers as it was not being used in any tests.

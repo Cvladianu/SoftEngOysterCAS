@@ -22,7 +22,8 @@ public class ChargerTest {
     private ControllableClock clock;
     private JourneyCostCalculator journeyCostCalculator;
     private List<Journey> journeys;
-    private List<Customer> customers;
+    private JourneyStart start;
+    private JourneyEnd end;
     private CustomerCharger customerCharger;
     private Customer customer;
     private ControllablePaymentSystem paymentSystem;
@@ -34,24 +35,22 @@ public class ChargerTest {
         journeyCostCalculator= new JourneyCostCalculator();
         journeys= new ArrayList<Journey>();
         cardId=UUID.randomUUID();
-        customers = new ArrayList<Customer>();
         customer= new Customer("Fred Bloggs", new OysterCard("38400000-8cf0-11bd-b23e-10b96e4ef00d"));
         customerCharger = new CustomerCharger();
         paymentSystem = new ControllablePaymentSystem();
+
+        readerId= UUID.randomUUID();
+        clock.setTime(4, 0, 0);
+        start = new JourneyStart(cardId, readerId, clock);
+        readerId=UUID.randomUUID();
+        clock.setTime(6,11,32);
+        end = new JourneyEnd(cardId, readerId, clock);
+        journeys.add(new Journey(start,end));
     }
 
     @Test
-    public void TestChargeAmountOneJourney()
+    public void TestChargeAmountOneJourneyLongPeak()
     {
-        customers.add(customer);
-        readerId= UUID.randomUUID();
-        clock.setTime(4, 0, 0);
-        JourneyStart start = new JourneyStart(cardId, readerId, clock);
-        readerId=UUID.randomUUID();
-        clock.setTime(6,11,32);
-        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
-        journeys.add(new Journey(start,end));
-
         customerCharger.charge(customer, journeys, paymentSystem);
 
         assertEquals(customer, paymentSystem.getCustomer());
@@ -60,17 +59,8 @@ public class ChargerTest {
     }
 
     @Test
-    public void TestChargeAmountTwoJourneys()
+    public void TestChargeAmountTwoJourneysLongPeakAndShortOffPeak()
     {
-        customers.add(customer);
-        readerId= UUID.randomUUID();
-        clock.setTime(4, 0, 0);
-        JourneyStart start = new JourneyStart(cardId, readerId, clock);
-        readerId=UUID.randomUUID();
-        clock.setTime(6,11,32);
-        JourneyEnd end = new JourneyEnd(cardId, readerId, clock);
-        journeys.add(new Journey(start,end));
-
         readerId=UUID.randomUUID();
         clock.setTime(2, 12, 0);
         start = new JourneyStart(cardId, readerId, clock);
