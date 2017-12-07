@@ -10,6 +10,7 @@ import java.util.List;
  * Created by cosmi_owugxv5 on 12/4/2017.
  */
 public class JourneyCostCalculator {
+    //BiDecimals initialised with Strings for accuracy reasons, preventing buggs
     private static final BigDecimal OFF_PEAK_LIMIT = new BigDecimal("7");
     private static final BigDecimal PEAK_LIMIT = new BigDecimal("9");
     private static final BigDecimal LONG_PEAK_JOURNEY_PRICE = new BigDecimal("3.80");
@@ -26,8 +27,7 @@ public class JourneyCostCalculator {
         for (Journey journey : journeys) {
             customerTotal = customerTotal.add(getJourneyPrice(journey));
         }
-
-        return roundToNearestPenny(withLimits(customerTotal));
+        return roundToNearestPenny(withLimits(customerTotal)); //applies daily limit caps to the charge
     }
 
     public BigDecimal getJourneyPrice(Journey journey)

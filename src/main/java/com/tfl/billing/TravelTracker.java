@@ -10,8 +10,7 @@ import com.tfl.external.Customer;
 import java.util.*;
 
 public class TravelTracker implements ScanListener {
-    //trying to refactor eventLog into a map
-    private final HashMap<UUID, ArrayList<JourneyEvent>> eventLog;
+    private final HashMap<UUID, ArrayList<JourneyEvent>> eventLog; // eventlog.get(cardId) will indicate all the journies completed by the customer owning the card with cardId
     private final Set<UUID> currentlyTravelling;
     private final CustomersDatabase customersDatabase;
     private final PaymentSystem paymentSystem;
@@ -37,9 +36,7 @@ public class TravelTracker implements ScanListener {
     }
 
     public void chargeAccounts() {
-        CustomersDatabase customerDatabase = customersDatabase;
-
-        List<Customer> customers = customerDatabase.getCustomers();
+        List<Customer> customers = customersDatabase.getCustomers();
         for (Customer customer : customers) {
             totalJourneysFor(customer);
         }
@@ -68,7 +65,6 @@ public class TravelTracker implements ScanListener {
                 start = null;
             }
         }
-
         return journeys;
     }
 
@@ -88,7 +84,6 @@ public class TravelTracker implements ScanListener {
     public void cardScanned(UUID cardId, UUID readerId) {
         if (currentlyTravelling.contains(cardId)) {
             addToMap(cardId,new JourneyEnd(cardId, readerId));
-            //eventLog.get(cardId).add(new JourneyEnd(cardId, readerId));
             currentlyTravelling.remove(cardId);
         } else {
             if (customersDatabase.isRegisteredId(cardId)) {

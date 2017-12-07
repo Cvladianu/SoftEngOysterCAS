@@ -42,6 +42,7 @@ public class Journey {
         return (int) ((end.time() - start.time()) / 1000);
     }
 
+    //despite incosistency, leaving durationMinutes method as String, as we do not know what its usage was thought to be
     public String durationMinutes() {
         return "" + durationSeconds() / 60 + ":" + durationSeconds() % 60;
     }
