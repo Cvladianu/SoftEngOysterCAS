@@ -8,8 +8,8 @@ import java.time.ZoneId;
 public class ControllableClock implements Clock {
     private LocalDateTime time;
     private LocalDateTime now;
-    private long epoch = System.currentTimeMillis();
-    // need to set just the hour, min and seconds, we get the current day and month
+    private long epochMilli = System.currentTimeMillis();
+    // need to set just the hour, min and seconds, as the current day, month and year will be the same
     private int day;
     private int month;
     private int year;
@@ -23,13 +23,13 @@ public class ControllableClock implements Clock {
     }
     @Override
     public long currentTimeMillis() {
-        return epoch;
+        return epochMilli;
     }
 
     public void setTime(int hour, int minute, int second) {
         time = LocalDateTime.of(year,month,day,hour, minute, second);
         ZoneId zoneId = ZoneId.systemDefault();
-        epoch = time.atZone(zoneId).toInstant().toEpochMilli();
+        epochMilli = time.atZone(zoneId).toInstant().toEpochMilli();
     }
 
 }
