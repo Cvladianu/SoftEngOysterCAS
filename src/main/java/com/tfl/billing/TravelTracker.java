@@ -11,7 +11,7 @@ import java.util.*;
 
 public class TravelTracker implements ScanListener {
     //trying to refactor eventLog into a map
-    private final List<JourneyEvent> eventLog;
+    private final HashMap<UUID, ArrayList<JourneyEvent>> eventLog;
     private final Set<UUID> currentlyTravelling;
     private final CustomersDatabase customersDatabase;
     private final PaymentSystem paymentSystem;
@@ -20,16 +20,16 @@ public class TravelTracker implements ScanListener {
 
     public TravelTracker()
     {
-        this.eventLog=new ArrayList<>();
+        this.eventLog=new HashMap<UUID, ArrayList<JourneyEvent> >();
         this.currentlyTravelling= new HashSet<>();
         this.customersDatabase = AdaptorDatabase.getInstance();
         this.paymentSystem= AdaptorPaymentSystem.getInstance();
         this.customerCharger = new CustomerCharger();
     }
     //Dependency injection
-    public TravelTracker(List<JourneyEvent> eventlog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase, PaymentSystem adaptorPaymentSystem)
+    public TravelTracker(HashMap<UUID, ArrayList<JourneyEvent>> eventLog, Set<UUID> currentlyTravelling, CustomersDatabase customersDatabase, PaymentSystem adaptorPaymentSystem)
     {
-        this.eventLog=eventlog;
+        this.eventLog=eventLog;
         this.currentlyTravelling=currentlyTravelling;
         this.customersDatabase = customersDatabase;
         this.paymentSystem=adaptorPaymentSystem;
@@ -53,12 +53,8 @@ public class TravelTracker implements ScanListener {
 
     private List<Journey> journeysFor(Customer customer)
     {
-        List<JourneyEvent> customerJourneyEvents = new ArrayList<JourneyEvent>();
-        for (JourneyEvent journeyEvent : eventLog) {
-            if (journeyEvent.cardId().equals(customer.cardId())) {
-                customerJourneyEvents.add(journeyEvent);
-            }
-        }
+        List<JourneyEvent> customerJourneyEvents;
+        customerJourneyEvents=eventLog.get(customer.cardId());
 
         List<Journey> journeys = new ArrayList<Journey>();
 
@@ -82,15 +78,22 @@ public class TravelTracker implements ScanListener {
         }
     }
 
+    private void addToMap(UUID key, JourneyEvent event)
+    {
+        eventLog.putIfAbsent(key, new ArrayList<JourneyEvent>());
+        eventLog.get(key).add(event);
+    }
+
     @Override
     public void cardScanned(UUID cardId, UUID readerId) {
         if (currentlyTravelling.contains(cardId)) {
-            eventLog.add(new JourneyEnd(cardId, readerId));
+            addToMap(cardId,new JourneyEnd(cardId, readerId));
+            //eventLog.get(cardId).add(new JourneyEnd(cardId, readerId));
             currentlyTravelling.remove(cardId);
         } else {
             if (customersDatabase.isRegisteredId(cardId)) {
                 currentlyTravelling.add(cardId);
-                eventLog.add(new JourneyStart(cardId, readerId));
+                addToMap(cardId,new JourneyEnd(cardId, readerId));
             } else {
                 throw new UnknownOysterCardException(cardId);
             }

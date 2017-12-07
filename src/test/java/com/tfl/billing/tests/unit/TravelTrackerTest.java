@@ -28,7 +28,7 @@ public class TravelTrackerTest {
     private UUID cardId1;
     private UUID readerId;
     private TravelTracker travelTracker;
-    private List<JourneyEvent> eventLog;
+    private HashMap<UUID, ArrayList<JourneyEvent> > eventLog;
     private Set<UUID> currentlyTravelling;
     private CustomersDatabase md;
 
@@ -37,7 +37,7 @@ public class TravelTrackerTest {
     {
         cardId1 =UUID.fromString("267b3378-678d-4da7-825e-3552982d48ab");
         readerId=UUID.randomUUID();
-        eventLog = new ArrayList<>();
+        eventLog = new HashMap<UUID, ArrayList<JourneyEvent> >();
         currentlyTravelling = new HashSet<>();
         md = context.mock(CustomersDatabase.class);
     }
@@ -73,7 +73,7 @@ public class TravelTrackerTest {
 
        travelTracker.cardScanned(cardId1, readerId);
        assertTrue(currentlyTravelling.contains(cardId1));
-       assertFalse(eventLog.isEmpty());
+       assertFalse(eventLog.get(cardId1).isEmpty());
 
        context.assertIsSatisfied();
     }
@@ -99,7 +99,8 @@ public class TravelTrackerTest {
         readerId=UUID.randomUUID();
         travelTracker.cardScanned(cardId2, readerId);
 
-        assertTrue(eventLog.size() == 3);
+        assertTrue(eventLog.get(cardId1).size() == 1);
+        assertTrue(eventLog.get(cardId2).size() == 2);
         assertTrue(currentlyTravelling.contains(cardId1));
         assertFalse(currentlyTravelling.contains(cardId2));
 
@@ -114,6 +115,6 @@ public class TravelTrackerTest {
 
         travelTracker.cardScanned(cardId1, readerId);
         assertFalse(currentlyTravelling.contains(cardId1)) ;
-        assertFalse(eventLog.isEmpty());
+        assertFalse(eventLog.get(cardId1).isEmpty());
     }
 }

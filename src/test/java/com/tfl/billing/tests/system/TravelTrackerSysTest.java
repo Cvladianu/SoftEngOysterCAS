@@ -28,7 +28,7 @@ public class TravelTrackerSysTest {
     private UUID readerId;
     private List<Customer> customers;
     private TravelTracker travelTracker;
-    private List<JourneyEvent> eventLog;
+    private HashMap<UUID, ArrayList<JourneyEvent> > eventLog;
     private JourneyStart start;
     private JourneyEnd end;
     private Set<UUID> currentlyTravelling;
@@ -42,7 +42,7 @@ public class TravelTrackerSysTest {
         clock = new ControllableClock();
         paymentSystem = new ControllablePaymentSystem();
         md = context.mock(CustomersDatabase.class);
-        eventLog = new ArrayList<>();
+        eventLog = new HashMap<UUID, ArrayList<JourneyEvent> >();
         currentlyTravelling = new HashSet<>();
         journeyCostCalculator= new JourneyCostCalculator();
         customers= new ArrayList<Customer>();
@@ -111,8 +111,8 @@ public class TravelTrackerSysTest {
         readerId=UUID.randomUUID();
         clock.setTime(6,11,32);
         end = new JourneyEnd(cardId, readerId, clock);
-        eventLog.add(start);
-        eventLog.add(end);
+        addToMap(cardId, start);
+        addToMap(cardId, end);
     }
 
     private void setUpLongOffPeak()
@@ -123,8 +123,15 @@ public class TravelTrackerSysTest {
         readerId=UUID.randomUUID();
         clock.setTime(2,37,5);
         end = new JourneyEnd(cardId, readerId, clock);
-        eventLog.add(start);
-        eventLog.add(end);
+
+        addToMap(cardId, start);
+        addToMap(cardId, end);
+    }
+
+    private void addToMap(UUID key, JourneyEvent event)
+    {
+        eventLog.putIfAbsent(key, new ArrayList<JourneyEvent>());
+        eventLog.get(key).add(event);
     }
 
     //commented as currently not used, but might be useful in the future
@@ -136,8 +143,8 @@ public class TravelTrackerSysTest {
         readerId=UUID.randomUUID();
         clock.setTime(6,11,32);
         end = new JourneyEnd(cardId, readerId, clock);
-        eventLog.add(start);
-        eventLog.add(end);
+        addToMap(cardId, start);
+        addToMap(cardId, end);
     }
 
     private void setUpShortOffPeak()
@@ -148,7 +155,7 @@ public class TravelTrackerSysTest {
         readerId=UUID.randomUUID();
         clock.setTime(2,27,38);
         end = new JourneyEnd(cardId, readerId, clock);
-        eventLog.add(start);
-        eventLog.add(end);
+        addToMap(cardId, start);
+        addToMap(cardId, end);
     }*/
 }
