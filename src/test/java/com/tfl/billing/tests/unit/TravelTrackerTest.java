@@ -24,7 +24,7 @@ import java.util.*;
  */
 public class TravelTrackerTest {
     @Rule
-    private JUnitRuleMockery context = new JUnitRuleMockery();
+    public JUnitRuleMockery context = new JUnitRuleMockery();
 
     private UUID cardId1;
     private UUID readerId;

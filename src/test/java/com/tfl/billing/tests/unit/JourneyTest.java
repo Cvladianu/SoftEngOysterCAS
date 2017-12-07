@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public class JourneyTest {
     @Rule
-    private JUnitRuleMockery context = new JUnitRuleMockery();
+    public JUnitRuleMockery context = new JUnitRuleMockery();
 
     private UUID cardId;
     private UUID readerIdStart;
