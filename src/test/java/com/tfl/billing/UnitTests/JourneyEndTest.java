@@ -1,7 +1,8 @@
-package com.tfl.billing;
+package com.tfl.billing.UnitTests;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import com.tfl.billing.JourneyEnd;
 import org.junit.Test;
 
 import java.util.UUID;

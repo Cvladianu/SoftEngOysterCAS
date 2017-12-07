@@ -1,6 +1,7 @@
-package com.tfl.billing;
+package com.tfl.billing.UnitTests;
 
 import com.oyster.OysterCard;
+import com.tfl.billing.*;
 import com.tfl.billing.Utils.ControllableClock;
 import com.tfl.billing.Utils.ControllablePaymentSystem;
 import com.tfl.external.Customer;

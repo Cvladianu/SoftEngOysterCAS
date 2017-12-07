@@ -1,4 +1,4 @@
-package com.tfl.billing;
+package com.tfl.billing.UnitTests;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
@@ -8,6 +8,9 @@ import static org.junit.Assert.assertTrue;
 import com.tfl.billing.Adaptors.AdaptorDatabase;
 import com.tfl.billing.Adaptors.AdaptorPaymentSystem;
 import com.tfl.billing.Adaptors.CustomersDatabase;
+import com.tfl.billing.JourneyEvent;
+import com.tfl.billing.TravelTracker;
+import com.tfl.billing.UnknownOysterCardException;
 import com.tfl.external.Customer;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;

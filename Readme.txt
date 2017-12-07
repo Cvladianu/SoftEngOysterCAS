@@ -82,3 +82,5 @@ to allow more testing implementations, with other controllers/implementations of
 35. Same for ChargerTest; removed the array of customers as it was not being used in any tests. moved the creation of the first journey in the setup, as it is currently the same for both tests, and eliminates duplicate code.
 
 36. in controllerclock epoch -> epochMilli for consistency;
+
+37. moved unit tests in a UnitTests package.

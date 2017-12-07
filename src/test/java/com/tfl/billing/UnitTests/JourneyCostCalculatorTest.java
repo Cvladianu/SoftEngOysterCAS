@@ -1,5 +1,9 @@
-package com.tfl.billing;
+package com.tfl.billing.UnitTests;
 
+import com.tfl.billing.Journey;
+import com.tfl.billing.JourneyCostCalculator;
+import com.tfl.billing.JourneyEnd;
+import com.tfl.billing.JourneyStart;
 import com.tfl.billing.Utils.ControllableClock;
 import org.junit.Before;
 import org.junit.Test;

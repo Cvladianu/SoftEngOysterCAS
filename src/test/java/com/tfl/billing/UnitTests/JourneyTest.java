@@ -1,6 +1,10 @@
-package com.tfl.billing;
+package com.tfl.billing.UnitTests;
 
 import com.tfl.billing.Adaptors.SystemClock;
+import com.tfl.billing.Clock;
+import com.tfl.billing.Journey;
+import com.tfl.billing.JourneyEnd;
+import com.tfl.billing.JourneyStart;
 import com.tfl.billing.Utils.ControllableClock;
 import com.tfl.billing.Utils.RandomVals;
 import org.jmock.Expectations;
