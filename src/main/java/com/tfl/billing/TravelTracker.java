@@ -10,7 +10,7 @@ import com.tfl.external.Customer;
 import java.util.*;
 
 public class TravelTracker implements ScanListener {
-
+    //trying to refactor eventLog into a map
     private final List<JourneyEvent> eventLog;
     private final Set<UUID> currentlyTravelling;
     private final CustomersDatabase customersDatabase;
