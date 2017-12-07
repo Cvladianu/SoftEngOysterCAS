@@ -19,9 +19,6 @@ public class JourneyCostCalculator {
     private static final long longJourneyDelimitator=25*60;
     private boolean isPeak;
 
-    public JourneyCostCalculator() {
-    }
-
     public BigDecimal customerTotalFor(List<Journey> journeys)
     {
         BigDecimal customerTotal = new BigDecimal(0);
