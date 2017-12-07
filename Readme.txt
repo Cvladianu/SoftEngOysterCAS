@@ -92,4 +92,4 @@ to allow more testing implementations, with other controllers/implementations of
 40. refactored methods in tests to begin with lower case leters, created a package for tests, with sub packages for unit and system tests.
 in travelTrackerTest, moved cardId2 to a local scope, since it is only used once (for now).
 
-41. replaced bigdecimal literals to Strings (from floats), because that's apparently good practice and eliminates precision errors.
+41. replaced bigdecimal literals to Strings (from floats), because that's apparently good practice and eliminates precision errors. eliminated redundant assignment customertotal=withLimits(customertotal)-> return round(withLimits(customertotal));

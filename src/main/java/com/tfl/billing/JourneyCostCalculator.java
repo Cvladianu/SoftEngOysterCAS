@@ -26,8 +26,8 @@ public class JourneyCostCalculator {
         for (Journey journey : journeys) {
             customerTotal = customerTotal.add(getJourneyPrice(journey));
         }
-        customerTotal=withLimits(customerTotal);
-        return roundToNearestPenny(customerTotal);
+        
+        return roundToNearestPenny(withLimits(customerTotal));
     }
 
     public BigDecimal getJourneyPrice(Journey journey)
